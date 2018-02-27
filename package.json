@@ -1,0 +1,39 @@
+{
+	"name": "cubeShow",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "node server.js",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/minamotoshi/cubeShow.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/minamotoshi/cubeShow/issues"
+	},
+	"homepage": "https://github.com/minamotoshi/cubeShow#readme",
+	"devDependencies": {
+		"clean-webpack-plugin": "^0.1.17",
+		"css-loader": "^0.28.9",
+		"has": "^1.0.1",
+		"html-loader": "^0.5.5",
+		"html-webpack-plugin": "^2.30.1",
+		"style-loader": "^0.19.1",
+		"three": "^0.90.0",
+		"url-loader": "^0.6.2",
+		"webpack": "^3.10.0",
+		"webpack-dev-server": "^2.11.2",
+		"xml-loader": "^1.2.1"
+	},
+	"dependencies": {
+		"grunt": "^1.0.1",
+		"uglifyjs-webpack-plugin": "^1.1.6"
+	}
+}
