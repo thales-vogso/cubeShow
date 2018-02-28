@@ -20,7 +20,10 @@ module.exports = {
 			minify:{html5:true},
 			title:'cubeshow'
 		}),
-		//new UglifyJSPlugin(),
+		new UglifyJSPlugin(),
+		new webpack.ProvidePlugin({
+			THREE:"three"
+		}),
 		new webpack.HotModuleReplacementPlugin()
 	],
 	module:{
@@ -35,7 +38,8 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: 'images/[name].[ext]'
+							regExp: /(\w+)[\/|\\](\w+)\.(png|jpg|gif)/i,
+							name: 'images/[1]-[name].[ext]'
 						}
 					}
 				]

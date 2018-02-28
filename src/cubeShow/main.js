@@ -9,6 +9,11 @@
 ******************************************************************************/
 
 import * as THREE from "three";
+import "three/examples/js/controls/DeviceOrientationControls";
+
+import Cube from "./cube.js";
+import * as Preload from "./preload.js";
+
 
 /**
  *	版本
@@ -41,8 +46,8 @@ var main = function(container){
 	var __camera = null,	//摄像头
 		__scene = null,	//场景
 		__renderer = null,	//渲染器
-		__ball = null,	//球
-		__person = null,	//人视角
+		__box = null,	//盒子
+		__cubes = null,	//所有的六面体
 		__environment = null;	//环境
 	var _raycaster = new THREE.Raycaster(),	//射线
 		_objects = [],	//检测元素
@@ -59,7 +64,6 @@ var main = function(container){
 		WIDTH = window.innerWidth;
 		HEIGHT = window.innerHeight;
 		__camera = new THREE.PerspectiveCamera( 75, WIDTH / HEIGHT, 1, 1500 );
-		__camera.position.set(0, 0, 10);
 		__scene = new THREE.Scene();	//场景
 		
 		__renderer = new THREE.WebGLRenderer({canvas: container, antialias: true, alpha:true});	//渲染器
@@ -69,172 +73,68 @@ var main = function(container){
 		
 		//__stats = new Stats();
 		//document.body.appendChild(__stats.dom);
-		var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-		var map = new THREE.Texture(window.img.getImageByID("face"));
-		map.needsUpdate = true;
-		var material = new THREE.MeshBasicMaterial({map:map});
-		var mesh = new THREE.Mesh( geometry, material );
-		__scene.add( mesh );
+		__cubes = new THREE.Object3D();
+		__scene.add(__cubes);
+		_this.control();
 		animate();
 	};
 	_this.resize = function(width, height){
 		if(!width) width = window.innerWidth;
 		if(!height) height = window.innerHeight;
-		CAMERA_WIDTH = WIDTH = width;
+		WIDTH = width;
 		HEIGHT = height;
-		CAMERA_HEIGHT = HEIGHT * 0.8;
-		__camera.aspect = CAMERA_WIDTH/CAMERA_HEIGHT;
+		__camera.aspect = WIDTH/HEIGHT;
 		__camera.updateProjectionMatrix();
 		__renderer.setSize( WIDTH, HEIGHT );
 	};
 	/**
 	 *	启动
 	 */
-	_this.launch = function(coordinates){
-		for(var i in coordinates) {
-			if(isNaN(i)) continue;
-			var coordinate = coordinates[i];
-			coordinate.index = i;
-			__ball.addMarking(coordinate);
-		}
-		_this.reset();
-	};
-	_this.location = function(index){
-		var arr = __ball.getObjects();
-		if(!isNaN(index) && index < arr.length){
-			
-		}else{
-			index = 0;
-			var distance = 0;
-			for(var i in arr){
-				var s = arr[i];
-				var v = __ball.localToWorld(s.position.clone());
-				var d = v.distanceTo(__camera.position);
-				if(distance==0 || d < distance){
-					distance = d;
-					index = i;
+	_this.launch = function(){
+		let arr = require('./cubes.json');
+		let unit = 360/arr.length;
+		let radii = 50;
+		arr.forEach((o, k)=>{
+			for(let i in o){
+				let p = o[i]; 
+				if(p.hasOwnProperty("map")){
+					var map = new THREE.Texture(Preload.getResult(p.map));
+					map.needsUpdate = true;
+					p.map = map;
+					p.side = THREE.DoubleSide;
+				}
+				if(p.hasOwnProperty("opacity")){
+					p.transparent = true;
 				}
 			}
-		}
-		var state = arr[index];
-		cameraIn (state);
+			let mesh = new Cube(o);
+			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
+			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
+			mesh.position.x = x;
+			mesh.position.z = z;
+			__cubes.add(mesh);
+		})
 	};
-	/**
-	 *	灯光初始化
-	 *	@param	level	等级
-	 */
-	function lightInit (level) {
-		console.log(level);		
-		//__scene.add( createAmbient(),createDirectional(),createSpot());
-		if(level < 1){
-			addSpotLight(new THREE.Vector3(0, 200, -50), 0xff8d62,1,1,1,14);//↑
-			addSpotLight(new THREE.Vector3(0, -200, -50), 0xff8d62,0.5,1,1,14);//↓
-			addSpotLight(new THREE.Vector3(200, 0, -50), 0xff8d62,1,1,1,14);//←
-			addSpotLight(new THREE.Vector3(-200, 0, -50), 0xff8d62,1,1,1,14);//→
-			addSpotLight(new THREE.Vector3(-141, -141, -50), 0xff8d62,1,1,1,14);//↘
-			addSpotLight(new THREE.Vector3(141, -141, -50), 0xff8d62,1,1,1,14);//↙
-			addSpotLight(new THREE.Vector3(-141, 141, -50), 0xff8d62,1,1,1,14);//↗
-			addSpotLight(new THREE.Vector3(141, 141, -50), 0xff8d62,1,1,1,14);//↖
+	function createBox(){
+		var obj = {
+			front:{map:Preload.getResult("Uniqlo")},
+			back:{color:0xffffff,opacity:0.7},
+			back:{color:0xffffff,opacity:0.7},
+			back:{color:0xffffff,opacity:0.7},
+			top:{color:0xffffff,opacity:0.7},
+			bottom:{color:0xffffff,opacity:0.7}
 		}
-		addSpotLight(new THREE.Vector3(-296.5, 227.5, 0), 0xfe7a18,1.5,1,1,18);//主光
-		addSpotLight(new THREE.Vector3(-80, 180, 400), 0x45526c,3,1,1,8);//辅光
-	}
-	/**
-	 *	添加聚光灯
-	 */
-	function addSpotLight (pos, color, intensity, decay ,inner, outer) {
-		var light = new THREE.SpotLight( color, intensity, 0, THREE.Math.degToRad(outer), (outer - inner)/outer, decay );
-		light.position.copy(pos);
-		//var obj = new THREE.Object3D();
-		//__scene.add(obj);
-		//obj.position.copy(target);
-		//light.target = obj;
-		//light.lookAt(new THREE.Vector3(0,1000,0));
-		//light.castShadow = true;
-		__environment.add(light);
-	}
-	function createGlow () {
-		var map = new THREE.Texture(Globe.Preload.getResult("glow"));
-		map.needsUpdate = true;
-		var geometry = new THREE.PlaneGeometry( 500, 500, 1,1 );
-		var material = new THREE.MeshBasicMaterial( {map:map, side: THREE.DoubleSide, transparent:true} );
-		var plane = new THREE.Mesh( geometry, material );
-		plane.name = "glow";
-		var v = new THREE.Vector3(-16,-24,-80);
-		plane.position.copy(v);
-		__environment.add(plane);
-	}
-	function createRing (delay) {
-		var geometry = new THREE.TorusGeometry( 150, 0.1, 10, 100 );
-		var material = new THREE.MeshBasicMaterial( { color: 0xffffff,transparent:true } );
-		material.opacity = 0.3;
-		var torus = new THREE.Mesh( geometry, material );
-		torus.scale.set(0.1,0.1,0.1);
-		__environment.add( torus );
-		new TWEEN.Tween( torus.scale )
-			.to( {x:1,y:1,z:1}, 5000 )
-			.delay(delay)
-			.repeat(Infinity)
-			.repeatDelay(0)
-			.start();
+		__box = new Cube(obj);
+		__scene.add(__box);
 	}
 	/**
 	 *	控制
 	 */
 	_this.control = function(){
-		_controls = new THREE.TrackballControls(__camera);
+		_controls = new THREE.DeviceOrientationControls(__camera);
 		_controls.noZoom = true;
 		_controls.noPan = true;
-		_controls.addEventListener("change", onControlChange)
 	};
-	function onControlChange (e) {
-		var o = e.target.object;
-		//__environment.lookAt(__camera.position);
-		__environment.quaternion.copy(__camera.quaternion);
-	}
-	function cameraIn (state) {
-		state.active();
-		__ball.stop();
-		var aim = __ball.localToWorld( state.getPositionByRadius(CAMERA_Z) );
-		aim.negate();
-		var vec3 = new THREE.Vector3(0,0,0);
-		vec3.copy(__camera.position);
-		var motion = new THREE.Vector3(0,0,0);
-		var dis = vec3.distanceTo(aim);
-		var pan = new TWEEN.Tween( vec3 )
-			.to( aim, dis * 3 )
-			.easing(TWEEN.Easing.Quadratic.In)
-			.onUpdate(function(e){
-				motion.copy(vec3);
-				motion.setLength(CAMERA_FAR);
-				__camera.position.copy(motion);
-			})
-			.onComplete(function(e){ motion.setLength(CAMERA_NEAR); })
-		var zoom = new TWEEN.Tween(__camera.position)
-			.to( motion, 1000 )
-			.easing(TWEEN.Easing.Quadratic.In)
-			.onComplete(function(e){ _this.dispatchEvent({ type: Globe.Event.STATE_SHOW, data:state.getIndex() }); })
-		pan.chain(zoom);
-		pan.start();
-	}
-	function cameraOut () {
-		var arr = __ball.getObjects();
-		for(var i in arr){
-			var o = arr[i];
-			o.recovery();
-		}
-		var vec3 = __camera.position.clone();
-		vec3.setLength(CAMERA_FAR)
-		var tween = new TWEEN.Tween( __camera.position )
-			.to( vec3, 1000 )
-			.easing(TWEEN.Easing.Quadratic.In)
-			.onComplete(function(){__ball.play();})
-			.start();
-	}
-	_this.reset = function() {
-		cameraOut();
-		__environment.quaternion.copy(__camera.quaternion);
-	}
 	/**
 	 *	动画
 	 */
@@ -252,4 +152,4 @@ var main = function(container){
 Object.assign( main.prototype, THREE.EventDispatcher.prototype);
 main.prototype.constructor = main;
 
-export {VER,Event,main};
+export {VER,Event,Preload,main};
