@@ -9,7 +9,6 @@ window.addEventListener('load', function(e){
 	_loading = document.getElementById("loading");
 });
 function progress(e){
-	console.log("progress", e);
 	_loading.innerHTML = e.loaded;
 }
 function complete(){

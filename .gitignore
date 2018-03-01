@@ -8,4 +8,5 @@ npm-debug.log
 .jshintrc
 .vs/
 /dist/
+/psd/
 package-lock.json

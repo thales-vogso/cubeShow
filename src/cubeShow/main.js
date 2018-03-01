@@ -13,6 +13,7 @@ import "three/examples/js/controls/DeviceOrientationControls";
 
 import Cube from "./cube.js";
 import * as Preload from "./preload.js";
+import { setTimeout } from "timers";
 
 
 /**
@@ -36,12 +37,8 @@ var main = function(container){
 	
 	var WIDTH = 0,
 		HEIGHT = 0;
-		
-	var CAMERA_X = 0,
-		CAMERA_Y = 0,
-		CAMERA_Z = -239,
-		CAMERA_NEAR = 150,
-		CAMERA_FAR = 239;
+	const BOX_Y = -10,
+		BOX_Z = -20;
 		
 	var __camera = null,	//摄像头
 		__scene = null,	//场景
@@ -49,9 +46,7 @@ var main = function(container){
 		__box = null,	//盒子
 		__cubes = null,	//所有的六面体
 		__environment = null;	//环境
-	var _raycaster = new THREE.Raycaster(),	//射线
-		_objects = [],	//检测元素
-		_enable = true;	//允许操作
+	var _boxIsMove = true;	//方盒运动
 	var _controls = null;	//控制器
 	var __stats = null;	//fps
 	
@@ -91,41 +86,74 @@ var main = function(container){
 	 *	启动
 	 */
 	_this.launch = function(){
+		createBox();
 		let arr = require('./cubes.json');
 		let unit = 360/arr.length;
 		let radii = 50;
 		arr.forEach((o, k)=>{
-			for(let i in o){
-				let p = o[i]; 
-				if(p.hasOwnProperty("map")){
-					var map = new THREE.Texture(Preload.getResult(p.map));
-					map.needsUpdate = true;
-					p.map = map;
-					p.side = THREE.DoubleSide;
-				}
-				if(p.hasOwnProperty("opacity")){
-					p.transparent = true;
-				}
-			}
+			checkParams(o);
 			let mesh = new Cube(o);
+			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
+			//mesh.play();
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
-			mesh.position.x = x;
-			mesh.position.z = z;
+			let y = 0;
+			mesh.aim(x, y, z);
 			__cubes.add(mesh);
 		})
 	};
-	function createBox(){
-		var obj = {
-			front:{map:Preload.getResult("Uniqlo")},
-			back:{color:0xffffff,opacity:0.7},
-			back:{color:0xffffff,opacity:0.7},
-			back:{color:0xffffff,opacity:0.7},
-			top:{color:0xffffff,opacity:0.7},
-			bottom:{color:0xffffff,opacity:0.7}
+	/**
+	 * 检测参数
+	 * @param {*} obj 
+	 */
+	function checkParams(obj){
+		for(let k in obj){
+			var o = obj[k];
+			if(!o) continue;
+			if(o.hasOwnProperty("map")){
+				var map = new THREE.Texture(Preload.getResult(o.map));
+				map.needsUpdate = true;
+				o.map = map;
+			}
+			if(o.hasOwnProperty("opacity")){
+				o.transparent = true;
+			}
 		}
+	}
+	/**
+	 * 创建方盒
+	 */
+	function createBox(){
+		let obj = {
+			front:{map:"Uniqlo"},
+			back:{map:"Uniqlo"},
+			left:{color:"white",opacity:0.9},
+			right:{color:"white",opacity:0.9},
+			top:null,
+			bottom:{color:"white",opacity:0.7}
+		}
+		checkParams(obj);
 		__box = new Cube(obj);
+		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
+		__box.fadeIn();
 		__scene.add(__box);
+	}
+	function moveBox(){
+		if(!_boxIsMove) return;
+		let v = new THREE.Vector3(0,BOX_Y, BOX_Z);
+		__camera.localToWorld(v);
+		if(__box)__box.position.copy(v);
+	}
+	function onFadeIn(e){
+		_boxIsMove = false;
+		var delay = 0;
+		for(let k in __cubes.children){
+			let cube = __cubes.children[k];
+			cube.position.copy(__box.position);
+			delay += Math.random() * 200;
+			cube.fly(delay);
+		}
+		setTimeout(()=>{__box.fadeOut();}, delay + 1000);
 	}
 	/**
 	 *	控制
@@ -140,7 +168,7 @@ var main = function(container){
 	 */
 	function animate() {
 		requestAnimationFrame( animate );
-		//TWEEN.update();
+		moveBox();
 		if(__stats)__stats.update();
 		if(_controls)_controls.update();
 		__renderer.render( __scene, __camera );
