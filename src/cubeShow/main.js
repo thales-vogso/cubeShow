@@ -8,7 +8,6 @@
 *	@modify	null
 ******************************************************************************/
 
-import * as THREE from "three";
 import "three/examples/js/controls/DeviceOrientationControls";
 
 import Cube from "./cube.js";
