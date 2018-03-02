@@ -1,132 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="x5-page-mode" content="no-title">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="full-screen" content="true" />
-    <meta name="x5-orientation" content="portrait" />
-    <meta name="x5-fullscreen" content="true" />
-    <meta name="360-fullscreen" content="true" />
-    <title>手Q环境AR效果Demo</title>
-<script	type='text/javascript'	src='http://js.aq.qq.com/js/aq_common.js'></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>手Q环境AR效果Demo</title>
 </head>
 
 <body>
 	<div id="ar-loading">loading...</div>
-	<div id="ar-index">
-		<a href="javascript:;">LBS已匹配，立刻进店</a>        
-    </div>
-
-    <div id="ar-video" style="width:100%;height:100%;z-index:1;display:none">
-        <video id="video" class="video" autoplay=""></video>
-        <canvas id="canvas" style="position:absolute;left:0px;top:0px;"></canvas>
-    </div>
-
-    <div id="ar-recognition" style="z-index:99;display:none;">
-        <canvas id="ar-game"></canvas>
-        <p id="ar-recognition-result"></p>
-    </div>
-
-    <div id="ar-panel" style="z-index:99;display:none;">
-        <a href="http://www.uniqlo.cn/">优衣库官网</a>
-    </div>
-
-    <!--<script type="text/javascript" src="//res.imtt.qq.com/tagapp/circle/vconsole.min.js"></script>-->
-    <script src="//jsapi.qq.com/get?api=ar.*,event.*,env.version,screen.*"></script>
-    <script type="text/javascript" src="//res.imtt.qq.com/tbs/tbs.js"></script>
-    <script src="//open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
-    <script type="text/javascript" src="//res.imtt.qq.com/WebAR/Release/ARLib_v2.0.js"></script>
-    <script src="//res.imtt.qq.com/component/mtt_qb.min.js"></script>
-
-
-
-    <script>
-        var ARLib = window.$ARLib || {};
-        var activityUrl = '';
-        var cameraFacing = 1;
-        var animationFrame, resultCleanTimer = null, pointsCleanTimer = null;
-        var facePoints, featurePoints;
-        var isRecognizeStart = false;
-        var showFeaturePoints = true;
-
-        var QBVer = ARLib.getQQBrowserVersion();
-        var TBSVer = ARLib.getTBSVersion();
-        var isQQBrowser = ARLib.isQQBrowser();
-        var isTBS = ARLib.isTBS();
-        var isIOS = ARLib.isIOS();
-        var isAndroid = ARLib.isAndroid();
-        var isQBInstall = false;
-
-        var resultElement = document.getElementById("ar-recognition-result");
-        var resultImgElement = document.getElementById("ar-recognition-img");
-        var videoElement = document.getElementById("video");
-        var canvasElement = document.getElementById("canvas");
-        var context = canvasElement.getContext("2d");
-
-        if (!isQQBrowser) {
-            mtt.qb.isInstall(function(isInstall) {
-                //isInstall true:已经安装 false:未安装
-                console.log("mtt.qb.isInstall: isInstall=" + isInstall);
-                isQBInstall = isInstall;
-            });
-        }
-
-        function shouldDownloadQQBrowser(title) {
-            var ret = confirm(title);
-            if (ret == true) {
-                var a = document.createElement("a");
-                a.href = "http://mdc.html5.qq.com/d/directdown.jsp?channel_id=10983";
-                a.click();
-                a.remove();
-            } else {
-
-            }
-        }
-
-        function openURLWithQQBrowser() {
-            mtt.qb.openQb({
-                url: window.location.href
-            });
-        }
-       
-        function goDiscovery() {
-			
-            ARLib.openCamera(cameraFacing, function(ret) {
-                if (ret) {
-                    if (isIOS) {
-                        document.body.style.backgroundColor = "white";
-                    }
-                    document.getElementById('ar-index').style.display = 'none';
-                    if (isAndroid) {
-                        document.getElementById('ar-video').style.display = '';
-                    }
-                    document.getElementById('ar-panel').style.display = '';
-					document.getElementById('ar-recognition').style.display = '';
-					_game.launch();//游戏启动
-                }
-            });
-        }
-	</script>
+	<div id="ar-index" style="z-index:99;display:none;">
+		<a href="javascript:;">launch</a>
+	</div>
+	<div id="ar-recognition" style="z-index:99;display:none;">
+		<canvas id="ar-game"></canvas>
+		<p id="ar-recognition-result"></p>
+	</div>
 	<script>
 		
 var _game = null;
-var _loading = null;
 window.addEventListener('load', function(e){
 	CubeShow.Preload.load(progress, complete);
-	_loading = document.getElementById("ar-loading");
 });
 function progress(e){
-	_loading.innerHTML = e.loaded;
+	document.getElementById("ar-loading").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
 }
 function complete(){
-	_loading.style.display = "none";
 	var game = document.getElementById("ar-game");
 	_game = new CubeShow.main(game);
-	document.getElementById("ar-index").addEventListener("click", goDiscovery);
-}	
+	document.getElementById("ar-loading").style.display = "none";
+	document.getElementById("ar-index").style.display = "";
+	document.getElementById("ar-index").addEventListener("click", onLaunch);
+}
+function onLaunch(){
+	document.getElementById("ar-index").style.display = "none";
+	document.getElementById("ar-recognition").style.display = "";
+	_game.launch();
+}
 
 	</script>
 </body>
