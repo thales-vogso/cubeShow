@@ -35,6 +35,11 @@ function onLaunch(){
 	document.getElementById("ar-index").style.display = "none";
 	document.getElementById("ar-recognition").style.display = "";
 	_game.launch();
+	var listener = document.getElementById("ar-recognition").addEventListener("click", (e)=>{ 
+		//document.getElementById("ar-recognition").removeEventListener("click", listener);
+		document.getElementById("ar-recognition-result").appendChild(CubeShow.frame);
+		CubeShow.frame.run();
+	 });
 }
 
 	</script>

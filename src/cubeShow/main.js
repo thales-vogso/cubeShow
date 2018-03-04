@@ -12,7 +12,6 @@ import "three/examples/js/controls/DeviceOrientationControls";
 
 import Cube from "./cube.js";
 import * as Preload from "./preload.js";
-import { setTimeout } from "timers";
 
 
 /**
@@ -37,7 +36,7 @@ var main = function(container){
 	var WIDTH = 0,
 		HEIGHT = 0;
 	const BOX_Y = -10,
-		BOX_Z = -20;
+		BOX_Z = -50;
 		
 	var __camera = null,	//摄像头
 		__scene = null,	//场景
@@ -87,17 +86,19 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
-		let unit = 360/arr.length;
+		let len = arr.length;
+		let unit = 360/len;
 		let radii = 50;
 		arr.forEach((o, k)=>{
 			checkParams(o);
 			let mesh = new Cube(o);
 			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
-			//mesh.play();
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
-			let y = 0;
-			mesh.aim(x, y, z);
+			let y = Math.random() * 20 -10;
+			let scale = Math.random() * 0.3 + 0.7;
+			mesh.scale.set(scale,scale,scale);
+			mesh.aim(x, y, z);	
 			__cubes.add(mesh);
 		})
 	};
@@ -133,6 +134,7 @@ var main = function(container){
 		}
 		checkParams(obj);
 		__box = new Cube(obj);
+		__box.scale.set(1.5,1.5,1.5);
 		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
 		__box.fadeIn();
 		__scene.add(__box);

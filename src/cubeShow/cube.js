@@ -4,12 +4,12 @@ import * as TWEEN from "es6-tween";
  */
 var Cube = function(param){
 	var _this = this;
-	const WIDTH = 5,	//尺寸
+	const WIDTH = 10,	//尺寸
 		SEGMENTS = 1,	//横断面
 		FADE_DURATION = 1000,	//淡入淡出间隔
-		RISE_Y = 10,	//上升位置
-		RISE_DURATION = 1000,	//上升间隔
-		PLUGE_DURATION = 500,	//下降间隔
+		RISE_Y = 30,	//上升位置
+		RISE_DURATION = 500,	//上升间隔
+		PLUGE_DURATION = 1000,	//下降间隔
 		ROTATION = -Math.PI/2,	//旋转角度
 		DELAY = 1000,	//间隔
 		DURATION = 5000;	//自转周期
@@ -55,25 +55,24 @@ var Cube = function(param){
 		_tween.stop();
 	};
 	_this.aim = function(x, y, z){
-		__entity.scale.set(0.5,0.5,0.5);
 		_this.visible = false;
 		_aim = new THREE.Vector3(x, y, z);
 	};
 	_this.fly = function(delay){
 		_this.visible = true;
+		let y = Math.random() * 10 + RISE_Y;
 		let rise = new TWEEN.Tween(_this.position)
 			.delay(delay)
-			.easing(TWEEN.Easing.Exponential.In)
-			.to({x:0,y:RISE_Y,z:0}, RISE_DURATION);
+			//.easing(TWEEN.Easing.Exponential.Out)
+			.to({y:y}, RISE_DURATION);
 		let pluge = new TWEEN.Tween(_this.position)
 			.to(_aim, PLUGE_DURATION)
-			.easing(TWEEN.Easing.Exponential.InOut);
+			.easing(TWEEN.Easing.Exponential.In);
 		rise.chainedTweens(pluge);
 		rise.on("complete", onFly);
 		rise.start();
 	};
 	function onFly(e){
-		__entity.scale.set(1,1,1);
 		_this.dispatchEvent({ type: Cube.Event.FLY });
 	}
 	/**
