@@ -20,7 +20,7 @@ module.exports = {
 			minify:{html5:true},
 			title:'cubeshow'
 		}),
-		//new UglifyJSPlugin(),
+		new UglifyJSPlugin(),
 		new webpack.ProvidePlugin({
 			THREE:"three"
 		}),

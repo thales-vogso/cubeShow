@@ -3,7 +3,6 @@ import * as CubeShow from "./cubeShow/main.js";
 var requireContext = require.context("./images/frame", true, /^\.\/.*\.png$/);
 //requireContext.keys().map(requireContext);
 
-window.CubeShow = CubeShow;
 
 let frame = document.createElement("div");
 let imgs = requireContext.keys().map(requireContext);
@@ -30,3 +29,5 @@ frame.run = function(){
 }
 
 CubeShow.frame = frame;
+
+window.CubeShow = CubeShow;

@@ -1,4 +1,4 @@
-this.createjs = {};
+this.createjs = this.createjs||{};
 window.createjs = this.createjs;
 
 //const createjs = require("createjs-preloadjs");
