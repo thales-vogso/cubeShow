@@ -6,6 +6,7 @@ var Cube = function(param){
 	var _this = this;
 	const WIDTH = 10,	//尺寸
 		SEGMENTS = 1,	//横断面
+		DISTANCE = 3,	//碰撞距离
 		FADE_DURATION = 1000,	//淡入淡出间隔
 		RISE_Y = 30,	//上升位置
 		RISE_DURATION = 500,	//上升间隔
@@ -15,10 +16,12 @@ var Cube = function(param){
 		DURATION = 5000;	//自转周期
 	var _tween = null,
 		_flyTween = null;
+	var _enable = false;	//点击
 	var __entity = null;
 	var _aim = null;
 	_this.init = function(param){
 		THREE.Object3D.call(_this);
+		_this.name = param.name;
 		let g = new THREE.BoxGeometry(WIDTH, WIDTH, WIDTH, SEGMENTS);
 		let m = [
 			getMaterial(param.right),	//right
@@ -45,6 +48,11 @@ var Cube = function(param){
 		}
 		return m;
 	}
+	_this.raycast = function( raycaster, intersects ){
+		if(_enable && raycaster.ray.distanceToPoint(_this.position) < DISTANCE){
+			intersects.push(_this);
+		}
+	};
 	/**
 	 *	自转
 	 */
@@ -67,12 +75,13 @@ var Cube = function(param){
 			.to({y:y}, RISE_DURATION);
 		let pluge = new TWEEN.Tween(_this.position)
 			.to(_aim, PLUGE_DURATION)
-			.easing(TWEEN.Easing.Exponential.In);
+			.easing(TWEEN.Easing.Cubic.In);
 		rise.chainedTweens(pluge);
 		rise.on("complete", onFly);
 		rise.start();
 	};
 	function onFly(e){
+		_enable = true;
 		_this.dispatchEvent({ type: Cube.Event.FLY });
 	}
 	/**
@@ -93,6 +102,7 @@ var Cube = function(param){
 	 * 淡出
 	 */
 	_this.fadeOut = function(){
+		_enable = false;
 		let tween = new TWEEN.Tween(__entity.scale)
 			.to({x:0.1,y:0.1,z:0.1}, FADE_DURATION)
 			.easing(TWEEN.Easing.Cubic.In)

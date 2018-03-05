@@ -25,11 +25,22 @@ import KidsSide from '../images/Kids/side.png';
 import UTFace from '../images/UT/face.jpg';
 import UTSide from '../images/UT/side.png';
 
+import person1 from '../images/paper/1.png';
+import person2 from '../images/paper/2.png';
+import person3 from '../images/paper/3.png';
+import person4 from '../images/paper/4.png';
+import person5 from '../images/paper/5.png';
+
 /**
  *	预先加载
  */
 var _queue = null;	//loder
 var _images = [	//图片组
+	{id:"person1", src:person1},
+	{id:"person2", src:person2},
+	{id:"person3", src:person3},
+	{id:"person4", src:person4},
+	{id:"person5", src:person5},
 	{id:"AirismFace", src:AirismFace},
 	{id:"AirismSide", src:AirismSide},
 	{id:"DressFace", src:DressFace},

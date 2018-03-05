@@ -1,5 +1,6 @@
 [
 	{
+		"name":"Airism",
 		"front":{"map":"AirismFace"},
 		"back":{"map":"AirismFace"},
 		"left":{"map":"AirismSide"},
@@ -8,6 +9,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"DPJ",
 		"front":{"map":"DPJFace"},
 		"back":{"map":"DPJFace"},
 		"left":{"map":"DPJSide"},
@@ -16,6 +18,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"Dress",
 		"front":{"map":"DressFace"},
 		"back":{"map":"DressFace"},
 		"left":{"map":"DressSide"},
@@ -24,6 +27,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"DryEX",
 		"front":{"map":"DryEXFace"},
 		"back":{"map":"DryEXFace"},
 		"left":{"map":"DryEXSide"},
@@ -32,6 +36,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"Jeans",
 		"front":{"map":"JeansFace"},
 		"back":{"map":"JeansFace"},
 		"left":{"map":"JeansSide"},
@@ -40,6 +45,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"kando",
 		"front":{"map":"kandoFace"},
 		"back":{"map":"kandoFace"},
 		"left":{"map":"kandoSide"},
@@ -48,6 +54,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"Kids",
 		"front":{"map":"KidsFace"},
 		"back":{"map":"KidsFace"},
 		"left":{"map":"KidsSide"},
@@ -56,6 +63,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
+		"name":"UT",
 		"front":{"map":"UTFace"},
 		"back":{"map":"UTFace"},
 		"left":{"map":"UTSide"},
@@ -64,78 +72,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
-		"front":{"map":"WirelessFace"},
-		"back":{"map":"WirelessFace"},
-		"left":{"map":"WirelessSide"},
-		"right":{"map":"WirelessSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"AirismFace"},
-		"back":{"map":"AirismFace"},
-		"left":{"map":"AirismSide"},
-		"right":{"map":"AirismSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"DPJFace"},
-		"back":{"map":"DPJFace"},
-		"left":{"map":"DPJSide"},
-		"right":{"map":"DPJSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"DressFace"},
-		"back":{"map":"DressFace"},
-		"left":{"map":"DressSide"},
-		"right":{"map":"DressSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"DryEXFace"},
-		"back":{"map":"DryEXFace"},
-		"left":{"map":"DryEXSide"},
-		"right":{"map":"DryEXSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"JeansFace"},
-		"back":{"map":"JeansFace"},
-		"left":{"map":"JeansSide"},
-		"right":{"map":"JeansSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"kandoFace"},
-		"back":{"map":"kandoFace"},
-		"left":{"map":"kandoSide"},
-		"right":{"map":"kandoSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"KidsFace"},
-		"back":{"map":"KidsFace"},
-		"left":{"map":"KidsSide"},
-		"right":{"map":"KidsSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
-		"front":{"map":"UTFace"},
-		"back":{"map":"UTFace"},
-		"left":{"map":"UTSide"},
-		"right":{"map":"UTSide"},
-		"top":{"color":"white","opacity":0.7},
-		"bottom":{"color":"white","opacity":0.7}
-	},
-	{
+		"name":"Wireless",
 		"front":{"map":"WirelessFace"},
 		"back":{"map":"WirelessFace"},
 		"left":{"map":"WirelessSide"},

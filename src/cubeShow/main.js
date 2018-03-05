@@ -22,7 +22,7 @@ const VER = "1.0.0";
  *	事件
  */
 const Event = {
-	STATE_SHOW:	"stateShow",
+	CUBE_CLICK:	"cubeClick",
 	GAME_INIT: "gameInit",
 	GAME_START:	"gameStart",
 	GAME_OVER:	"gameOver"
@@ -47,7 +47,9 @@ var main = function(container){
 	var _boxIsMove = true;	//方盒运动
 	var _controls = null;	//控制器
 	var __stats = null;	//fps
-	
+	var _raycaster = new THREE.Raycaster(),	//射线
+		_objects = [],	//检测元素
+		_enable = true;	//允许操作
 	/**
 	 *	初始化
 	 */
@@ -86,19 +88,20 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
+		arr = arr.concat(arr);
 		let len = arr.length;
 		let unit = 360/len;
 		let radii = 50;
 		arr.forEach((o, k)=>{
-			checkParams(o);
-			let mesh = new Cube(o);
+			let mesh = new Cube(checkParams(o));
 			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
 			let y = Math.random() * 20 -10;
 			let scale = Math.random() * 0.3 + 0.7;
 			mesh.scale.set(scale,scale,scale);
-			mesh.aim(x, y, z);	
+			mesh.aim(x, y, z);
+			_objects.push(mesh);
 			__cubes.add(mesh);
 		})
 	};
@@ -107,18 +110,27 @@ var main = function(container){
 	 * @param {*} obj 
 	 */
 	function checkParams(obj){
+		var param = {};
 		for(let k in obj){
-			var o = obj[k];
-			if(!o) continue;
-			if(o.hasOwnProperty("map")){
-				var map = new THREE.Texture(Preload.getResult(o.map));
-				map.needsUpdate = true;
-				o.map = map;
+			if( typeof(obj[k]) == "object") {
+				var o = {};
+				for(let i in obj[k]){
+					o[i] = obj[k][i];
+				}
+				param[k] = o;
+			}else{
+				param[k] = obj[k];
 			}
-			if(o.hasOwnProperty("opacity")){
-				o.transparent = true;
+			if(param[k].hasOwnProperty("map")){
+				var map = new THREE.Texture(Preload.getResult(param[k].map));
+				map.needsUpdate = true;
+				param[k].map = map;
+			}
+			if(param[k].hasOwnProperty("opacity")){
+				param[k].transparent = true;
 			}
 		}
+		return param;
 	}
 	/**
 	 * 创建方盒
@@ -132,8 +144,7 @@ var main = function(container){
 			top:null,
 			bottom:{color:"white",opacity:0.7}
 		}
-		checkParams(obj);
-		__box = new Cube(obj);
+		__box = new Cube(checkParams(obj));
 		__box.scale.set(1.5,1.5,1.5);
 		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
 		__box.fadeIn();
@@ -157,12 +168,70 @@ var main = function(container){
 		setTimeout(()=>{__box.fadeOut();}, delay + 1000);
 	}
 	/**
+	 * 纸片人出现
+	 */
+	_this.paper = function(){
+		__cubes.children.forEach((o)=>{
+			o.fadeOut();
+		});
+		let arr = ["person1","person2","person3","person4","person5"];
+		let len = arr.length;
+		let unit = 360/len;
+		let radii = 60;
+		arr.forEach((v, k)=>{
+			let s = addPaper(v);
+			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
+			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
+			let y = 0;
+			s.position.set(x, y, z);
+			__cubes.add(s);
+		});
+	};
+	function addPaper(id){
+		let img = Preload.getResult(id);
+		let t = new THREE.Texture(img);
+		t.needsUpdate = true;
+		let m = new THREE.SpriteMaterial( { map: t, transparent: true } );
+		let sprite = new THREE.Sprite( m );
+		sprite.scale.x = img.width/10;
+		sprite.scale.y = img.height/10;
+		return sprite;
+	}
+	/**
+	 *	点击
+	 */
+	function onClick( e ) {
+		e.preventDefault();
+		hitTest( e.clientX, e.clientY );
+	}
+	function onTouchStart (e) {
+		e.preventDefault();
+		hitTest( e.touches[0].clientX, e.touches[0].clientY );
+	}
+	/**
+	 *	点击检测
+	 */
+	function hitTest( x, y ) {
+		var mouse = {};
+		mouse.x = ( x / WIDTH) * 2 - 1;
+		mouse.y = - ( y / HEIGHT ) * 2 + 1;
+
+		_raycaster.setFromCamera( mouse, __camera );
+		var intersects = _raycaster.intersectObjects( _objects );
+		if ( intersects.length > 0 ) {
+			var obj = intersects[ 0 ];
+			_this.dispatchEvent({ type: Event.CUBE_CLICK, data:obj});
+		}
+	}
+	/**
 	 *	控制
 	 */
 	_this.control = function(){
 		_controls = new THREE.DeviceOrientationControls(__camera);
 		_controls.noZoom = true;
 		_controls.noPan = true;
+		document.addEventListener( 'click', onClick, false );
+		document.addEventListener( 'touchstart', onTouchStart, false );
 	};
 	/**
 	 *	动画

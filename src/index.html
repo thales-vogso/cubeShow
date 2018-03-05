@@ -13,7 +13,12 @@
 	</div>
 	<div id="ar-recognition" style="z-index:99;display:none;">
 		<canvas id="ar-game"></canvas>
-		<p id="ar-recognition-result"></p>
+		<div id="ar-recognition-result">
+			<div id="ar-result-jeans" style="display:none">
+				<img class="slogan" src="./images/paper/slogan.png"/>
+				<a href="#"><img class="btn" src="./images/paper/btn.png"/></a>
+			</div>
+		</div>
 	</div>
 	<script>
 		
@@ -27,6 +32,7 @@ function progress(e){
 function complete(){
 	var game = document.getElementById("ar-game");
 	_game = new CubeShow.main(game);
+	_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
 	document.getElementById("ar-loading").style.display = "none";
 	document.getElementById("ar-index").style.display = "";
 	document.getElementById("ar-index").addEventListener("click", onLaunch);
@@ -37,11 +43,17 @@ function onLaunch(){
 	_game.launch();
 	var listener = document.getElementById("ar-recognition").addEventListener("click", (e)=>{ 
 		//document.getElementById("ar-recognition").removeEventListener("click", listener);
-		document.getElementById("ar-recognition-result").appendChild(CubeShow.frame);
-		CubeShow.frame.run();
-	 });
+		//document.getElementById("ar-recognition-result").appendChild(CubeShow.frame);
+		//CubeShow.frame.run();
+	});
 }
-
+function onCubeClick(e){
+	console.log(e);
+	if(e.data.name == "Jeans"){
+		_game.paper();
+		document.getElementById("ar-result-jeans").style.display = "";
+	}
+}
 	</script>
 </body>
 
