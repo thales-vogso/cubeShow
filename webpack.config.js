@@ -22,7 +22,8 @@ module.exports = {
 		}),
 		new UglifyJSPlugin(),
 		new webpack.ProvidePlugin({
-			THREE:"three"
+			THREE:"three",
+			createjs:"latest-createjs"
 		}),
 		new webpack.HotModuleReplacementPlugin()
 	],

@@ -1,10 +1,3 @@
-this.createjs = this.createjs||{};
-window.createjs = this.createjs;
-
-//const createjs = require("createjs-preloadjs");
-//import * as createjs from "createjs-preloadjs";
-require("createjs-preloadjs");
-
 import Uniqlo from '../images/box/Uniqlo.png';
 import WirelessFace from '../images/Wireless/face.jpg';
 import WirelessSide from '../images/Wireless/side.png';

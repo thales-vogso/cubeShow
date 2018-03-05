@@ -10,8 +10,9 @@
 
 import "three/examples/js/controls/DeviceOrientationControls";
 
-import Cube from "./cube.js";
-import * as Preload from "./preload.js";
+import Cube from "./cube";
+import Cartoon from "./cartoon";
+import * as Preload from "./preload";
 
 
 /**
@@ -250,4 +251,4 @@ var main = function(container){
 Object.assign( main.prototype, THREE.EventDispatcher.prototype);
 main.prototype.constructor = main;
 
-export {VER,Event,Preload,main};
+export {VER,Event,Preload,Cartoon,main};

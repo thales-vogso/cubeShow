@@ -16,6 +16,9 @@
 		<div id="ar-recognition-result">
 			<div id="ar-result-dryex" style="display:none">
 			</div>
+			<div id="ar-result-cartoon" style="display:none">
+				<canvas id="ar-cartoon" width="320" height="568" style="width:100%;height:100%"></canvas>
+			</div>
 			<div id="ar-result-jeans" style="display:none">
 				<img class="slogan" src="./images/paper/slogan.png"/>
 				<a href="#"><img class="btn" src="./images/paper/btn.png"/></a>
@@ -24,7 +27,8 @@
 	</div>
 	<script>
 		
-var _game = null;
+var _game = null,
+	_cartoon = null;
 window.addEventListener('load', function(e){
 	CubeShow.Preload.load(progress, complete);
 });
@@ -35,6 +39,7 @@ function complete(){
 	var game = document.getElementById("ar-game");
 	_game = new CubeShow.main(game);
 	_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
+	_cartoon = new CubeShow.Cartoon(document.getElementById("ar-cartoon"));
 	document.getElementById("ar-loading").style.display = "none";
 	document.getElementById("ar-index").style.display = "";
 	document.getElementById("ar-index").addEventListener("click", onLaunch);
@@ -53,6 +58,9 @@ function onCubeClick(e){
 		document.getElementById("ar-result-dryex").style.display = "";
 		document.getElementById("ar-result-dryex").appendChild(CubeShow.frame);
 		CubeShow.frame.run();
+	}else if(e.data.name == "UT"){
+		document.getElementById("ar-result-cartoon").style.display = "";
+		_cartoon.ut();
 	}
 }
 	</script>
