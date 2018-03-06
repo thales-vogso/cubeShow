@@ -173,7 +173,7 @@ var main = function(container){
 	 */
 	_this.paper = function(){
 		
-		let arr = ["person1","person2","person3","person4","person5"];
+		let arr = ["paper-1","paper-2","paper-3","paper-4","paper-5"];
 		let len = arr.length;
 		let unit = 360/len;
 		let radii = 60;
