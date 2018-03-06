@@ -1,5 +1,5 @@
 import './main.css';
-import * as CubeShow from "./cubeShow/main.js";
+import * as CubeShow from "./cubeShow/main";
 var requireContext = require.context("./images/frame", true, /^\.\/.*\.png$/);
 //requireContext.keys().map(requireContext);
 

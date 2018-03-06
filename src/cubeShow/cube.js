@@ -44,12 +44,14 @@ var Cube = function(param){
 		let m = null;
 		if(p){
 			p.side = THREE.DoubleSide;
+			p.transparent = true;
 			m = new THREE.MeshBasicMaterial( p );
 		}
 		return m;
 	}
 	_this.raycast = function( raycaster, intersects ){
 		if(_enable && raycaster.ray.distanceToPoint(_this.position) < DISTANCE){
+			_enable = false;
 			intersects.push(_this);
 		}
 	};

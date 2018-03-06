@@ -20,7 +20,7 @@ module.exports = {
 			minify:{html5:true},
 			title:'cubeshow'
 		}),
-		new UglifyJSPlugin(),
+		//new UglifyJSPlugin(),
 		new webpack.ProvidePlugin({
 			THREE:"three",
 			createjs:"latest-createjs"
@@ -41,6 +41,17 @@ module.exports = {
 						options: {
 							regExp: /(\w+)[\/|\\](\w+)\.(png|jpg|gif)/i,
 							name: 'images/[1]-[name].[ext]'
+						}
+					}
+				]
+			},
+			{
+				test: /\.(wav|mp3)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'sounds/[name].[ext]'
 						}
 					}
 				]

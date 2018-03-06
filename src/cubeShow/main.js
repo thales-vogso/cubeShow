@@ -18,7 +18,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.0.0";
+const VER = "1.1.0";
 /**
  *	事件
  */
@@ -89,7 +89,7 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
-		arr = arr.concat(arr);
+		arr = arr.concat(arr, arr);
 		let len = arr.length;
 		let unit = 360/len;
 		let radii = 50;
@@ -99,7 +99,7 @@ var main = function(container){
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
 			let y = Math.random() * 20 -10;
-			let scale = Math.random() * 0.3 + 0.7;
+			let scale = Math.random() * 0.3 + 1;
 			mesh.scale.set(scale,scale,scale);
 			mesh.aim(x, y, z);
 			_objects.push(mesh);
@@ -123,12 +123,11 @@ var main = function(container){
 				param[k] = obj[k];
 			}
 			if(param[k].hasOwnProperty("map")){
-				var map = new THREE.Texture(Preload.getResult(param[k].map));
+				let id = param.name;
+				if(param[k].map) id += '-' + param[k].map;
+				let map = new THREE.Texture(Preload.getResult(id));
 				map.needsUpdate = true;
 				param[k].map = map;
-			}
-			if(param[k].hasOwnProperty("opacity")){
-				param[k].transparent = true;
 			}
 		}
 		return param;
@@ -138,8 +137,9 @@ var main = function(container){
 	 */
 	function createBox(){
 		let obj = {
-			front:{map:"Uniqlo"},
-			back:{map:"Uniqlo"},
+			name:"Uniqlo",
+			front:{map:null},
+			back:{map:null},
 			left:{color:"white",opacity:0.9},
 			right:{color:"white",opacity:0.9},
 			top:null,
@@ -172,9 +172,7 @@ var main = function(container){
 	 * 纸片人出现
 	 */
 	_this.paper = function(){
-		__cubes.children.forEach((o)=>{
-			o.fadeOut();
-		});
+		
 		let arr = ["person1","person2","person3","person4","person5"];
 		let len = arr.length;
 		let unit = 360/len;
@@ -220,7 +218,12 @@ var main = function(container){
 		_raycaster.setFromCamera( mouse, __camera );
 		var intersects = _raycaster.intersectObjects( _objects );
 		if ( intersects.length > 0 ) {
+			__cubes.children.forEach((o)=>{
+				o.fadeOut();
+			});
 			var obj = intersects[ 0 ];
+			let s = createjs.Sound.play("BGmusic_" + obj.name);
+			console.log(s);
 			_this.dispatchEvent({ type: Event.CUBE_CLICK, data:obj});
 		}
 	}
@@ -231,8 +234,8 @@ var main = function(container){
 		_controls = new THREE.DeviceOrientationControls(__camera);
 		_controls.noZoom = true;
 		_controls.noPan = true;
-		document.addEventListener( 'click', onClick, false );
-		document.addEventListener( 'touchstart', onTouchStart, false );
+		__renderer.domElement.addEventListener( 'click', onClick, false );
+		__renderer.domElement.addEventListener( 'touchstart', onTouchStart, false );
 	};
 	/**
 	 *	动画

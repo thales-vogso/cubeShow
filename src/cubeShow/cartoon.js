@@ -1,3 +1,6 @@
+import ut from "./ut";
+var comp=ut.getComposition("612B420ECEAD334B968E49A9CCF0AEAA");
+var lib=comp.getLibrary();
 /**
  *	主类，继承create.Stage
  *	@param	canvas	主体或者名称
@@ -6,8 +9,8 @@ var Cartoon = function(canvas){
 	var _this = this;
 	
 	var FPS = 24;	//帧频
-	var WIDTH = 320,
-		HEIGHT = 568;
+	var WIDTH = 720,
+		HEIGHT = 1560;
 	var __game = null,	//游戏载体
 		__surface = null;	//界面
 	/**
@@ -24,8 +27,13 @@ var Cartoon = function(canvas){
 		_this.on("tick", onTick);
 	};
 	_this.ut = function(){
-        var bit = new createjs.Bitmap(CubeShow.Preload.getResult("Uniqlo"));
-        __game.addChild(bit);
+		var ss=comp.getSpriteSheet();
+		var ssMetadata = lib.ssMetadata;
+		for(let i=0; i<ssMetadata.length; i++) {
+			ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [CubeShow.Preload.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+		}
+		let mc = new lib.ut();
+		_this.addChild(mc);
 	};
 	
 	function onTick (e) {
