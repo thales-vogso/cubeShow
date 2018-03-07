@@ -18,7 +18,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.1.0";
+const VER = "1.2.2";
 /**
  *	事件
  */
@@ -37,14 +37,13 @@ var main = function(container){
 	var WIDTH = 0,
 		HEIGHT = 0;
 	const BOX_Y = -10,
-		BOX_Z = -50;
+		BOX_Z = -30;
 		
 	var __camera = null,	//摄像头
 		__scene = null,	//场景
 		__renderer = null,	//渲染器
 		__box = null,	//盒子
-		__cubes = null,	//所有的六面体
-		__environment = null;	//环境
+		__cubes = null;	//所有的六面体
 	var _boxIsMove = true;	//方盒运动
 	var _controls = null;	//控制器
 	var __stats = null;	//fps
@@ -89,22 +88,27 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
-		arr = arr.concat(arr, arr);
+		//arr = arr.concat(arr, arr);
 		let len = arr.length;
-		let unit = 360/len;
+		let unit = 10;
 		let radii = 50;
 		arr.forEach((o, k)=>{
 			let mesh = new Cube(checkParams(o));
 			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
-			let y = Math.random() * 20 -10;
-			let scale = Math.random() * 0.3 + 1;
-			mesh.scale.set(scale,scale,scale);
+			let y = (k%2==0)?15:-15;
 			mesh.aim(x, y, z);
 			_objects.push(mesh);
 			__cubes.add(mesh);
 		})
+	};
+	_this.replay = function(){
+		createjs.Sound.stop();
+		__scene.remove(__cubes);
+		__cubes = new THREE.Object3D();
+		__scene.add(__cubes);
+		_this.launch();
 	};
 	/**
 	 * 检测参数
@@ -113,6 +117,7 @@ var main = function(container){
 	function checkParams(obj){
 		var param = {};
 		for(let k in obj){
+			if(!obj[k]) continue;
 			if( typeof(obj[k]) == "object") {
 				var o = {};
 				for(let i in obj[k]){
@@ -136,6 +141,7 @@ var main = function(container){
 	 * 创建方盒
 	 */
 	function createBox(){
+		_boxIsMove = true;
 		let obj = {
 			name:"Uniqlo",
 			front:{map:null},
@@ -146,7 +152,6 @@ var main = function(container){
 			bottom:{color:"white",opacity:0.7}
 		}
 		__box = new Cube(checkParams(obj));
-		__box.scale.set(1.5,1.5,1.5);
 		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
 		__box.fadeIn();
 		__scene.add(__box);
@@ -163,7 +168,7 @@ var main = function(container){
 		for(let k in __cubes.children){
 			let cube = __cubes.children[k];
 			cube.position.copy(__box.position);
-			delay += Math.random() * 200;
+			delay += Math.random() * 200 + 100;
 			cube.fly(delay);
 		}
 		setTimeout(()=>{__box.fadeOut();}, delay + 1000);

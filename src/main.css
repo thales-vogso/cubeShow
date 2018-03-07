@@ -48,6 +48,45 @@ html,body {
 #ar-result-jeans .btn{
 	width: 70%;
 }
+#ar-back-btn{
+	position: fixed;
+	z-index: 102;
+	top: 0;
+	right: 0;
+	width: 30%
+}
+#ar-info{
+	position: absolute;
+	z-index: 101;
+	width: 100%;
+	top:40%;
+	left:0;
+}
+#ar-info .arrow-left{
+	position: absolute;
+	left: 0;
+	top:50%;
+	width: 10%;
+}
+#ar-info .arrow-right{
+	position: absolute;
+	right: 0;
+	top:50%;
+	width: 10%;
+	transform: scale(-1,1);
+}
+#ar-info .arrow-left img, #ar-info .arrow-right img{
+	width: 100%;
+	animation: blink 0.5s ease-in-out infinite alternate;
+}
+#ar-info .tips{
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+#ar-info .tips img{
+	width: 50%
+}
 
 @keyframes myfirst {
 	0% {
@@ -64,5 +103,14 @@ html,body {
 	}
 	100% {
 		top: 99%;
+	}
+}
+
+@keyframes blink {
+	0% {
+		transform: scale(0.8);
+	}
+	100% {
+		transform: scale(1.0);
 	}
 }

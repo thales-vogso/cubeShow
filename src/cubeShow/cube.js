@@ -8,9 +8,10 @@ var Cube = function(param){
 		SEGMENTS = 1,	//横断面
 		DISTANCE = 3,	//碰撞距离
 		FADE_DURATION = 1000,	//淡入淡出间隔
-		RISE_Y = 30,	//上升位置
-		RISE_DURATION = 500,	//上升间隔
-		PLUGE_DURATION = 1000,	//下降间隔
+		RISE_Y = 50,	//上升位置
+		SCALE_MIN = 0.6,
+		SCALE_MAX = 1,
+		FLY_DURATION = 1000,	//下降间隔
 		ROTATION = -Math.PI/2,	//旋转角度
 		DELAY = 1000,	//间隔
 		DURATION = 5000;	//自转周期
@@ -19,6 +20,10 @@ var Cube = function(param){
 	var _enable = false;	//点击
 	var __entity = null;
 	var _aim = null;
+	var _p0 = new THREE.Vector3(0,0,0),
+		_p1 = new THREE.Vector3(0,0,0),
+		_p2 = new THREE.Vector3(0,0,0),
+		_p3 = new THREE.Vector3(0,0,0);
 	_this.init = function(param){
 		THREE.Object3D.call(_this);
 		_this.name = param.name;
@@ -66,22 +71,35 @@ var Cube = function(param){
 	};
 	_this.aim = function(x, y, z){
 		_this.visible = false;
+		_this.scale.set(SCALE_MIN,SCALE_MIN,SCALE_MIN);
+		_p3 = new THREE.Vector3(x, y, z);
+		_p2.copy(_p3).setY(_p1.y);
 		_aim = new THREE.Vector3(x, y, z);
 	};
 	_this.fly = function(delay){
+		_p0.copy(_this.position);
+		_p1.copy(_p0).setY(Math.random() * 10 + RISE_Y);
 		_this.visible = true;
-		let y = Math.random() * 10 + RISE_Y;
-		let rise = new TWEEN.Tween(_this.position)
+		let tween = new TWEEN.Tween({t:0})
 			.delay(delay)
-			//.easing(TWEEN.Easing.Exponential.Out)
-			.to({y:y}, RISE_DURATION);
-		let pluge = new TWEEN.Tween(_this.position)
-			.to(_aim, PLUGE_DURATION)
+			.to({t:1}, 2000)
+			.on("update", onFlying)
+			.on("complete", onFly)
 			.easing(TWEEN.Easing.Cubic.In);
-		rise.chainedTweens(pluge);
-		rise.on("complete", onFly);
-		rise.start();
+		tween.start();
 	};
+	function onFlying(e){
+		let x = cuBazier(e.t, _p0.x, _p1.x, _p2.x, _p3.x);
+		let y = cuBazier(e.t, _p0.y, _p1.y, _p2.y, _p3.y);
+		let z = cuBazier(e.t, _p0.z, _p1.z, _p2.x, _p3.z);
+		let scale = SCALE_MIN + e.t * (SCALE_MAX - SCALE_MIN);
+		_this.scale.set(scale,scale,scale);
+		_this.position.set(x,y,z);
+	}
+	function cuBazier(t, p0, p1, p2, p3){
+		let b = Math.pow((1-t), 3) * p0 + Math.pow((1-t), 2) * t * p1 * 3 + Math.pow(t, 2) * (1-t) * p2 * 3  + Math.pow(t, 3) * p3;
+		return b;
+	}
 	function onFly(e){
 		_enable = true;
 		_this.dispatchEvent({ type: Cube.Event.FLY });
