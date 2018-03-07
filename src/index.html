@@ -56,12 +56,13 @@ function complete(){
 function onLaunch(){
 	document.getElementById("ar-index").style.display = "none";
 	document.getElementById('ar-panel').style.display = '';
-	
+	document.getElementById('ar-info').style.display = '';
 	document.getElementById('ar-back-btn').addEventListener("click", onback);
 	document.getElementById("ar-recognition").style.display = "";	
 	_game.launch();
 }
 function onback(){
+	document.getElementById('ar-info').style.display = '';
 	document.getElementById('ar-back-btn').style.display = 'none';
 	document.getElementById("ar-result-jeans").style.display = "none";
 	document.getElementById("ar-result-dryex").style.display = "none";
@@ -69,6 +70,7 @@ function onback(){
 	_game.replay()
 }
 function onCubeClick(e){
+	document.getElementById('ar-info').style.display = 'none';
 	document.getElementById('ar-back-btn').style.display = '';
 	if(e.data.name == "Jeans"){
 		_game.paper();

@@ -6,7 +6,6 @@ var Cube = function(param){
 	var _this = this;
 	const WIDTH = 10,	//尺寸
 		SEGMENTS = 1,	//横断面
-		DISTANCE = 3,	//碰撞距离
 		FADE_DURATION = 1000,	//淡入淡出间隔
 		RISE_Y = 50,	//上升位置
 		SCALE_MIN = 0.6,
@@ -55,7 +54,7 @@ var Cube = function(param){
 		return m;
 	}
 	_this.raycast = function( raycaster, intersects ){
-		if(_enable && raycaster.ray.distanceToPoint(_this.position) < DISTANCE){
+		if(_enable && raycaster.ray.distanceToPoint(_this.position) < WIDTH/2){
 			_enable = false;
 			intersects.push(_this);
 		}
@@ -124,7 +123,7 @@ var Cube = function(param){
 	_this.fadeOut = function(){
 		_enable = false;
 		let tween = new TWEEN.Tween(__entity.scale)
-			.to({x:0.1,y:0.1,z:0.1}, FADE_DURATION)
+			.to({x:0.001,y:0.001,z:0.001}, FADE_DURATION)
 			.easing(TWEEN.Easing.Cubic.In)
 			.on("complete", (e)=>{_this.visible = false})
 			.start();

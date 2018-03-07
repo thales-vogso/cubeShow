@@ -55,6 +55,9 @@ html,body {
 	right: 0;
 	width: 30%
 }
+#ar-back-btn img{
+	width: 100%;
+}
 #ar-info{
 	position: absolute;
 	z-index: 101;

@@ -18,7 +18,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.2.2";
+const VER = "1.2.3";
 /**
  *	事件
  */
@@ -88,15 +88,16 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
-		//arr = arr.concat(arr, arr);
+		arr = arr.concat(arr, arr, arr);
 		let len = arr.length;
-		let unit = 10;
+		let unit = 360/len;
 		let radii = 50;
 		arr.forEach((o, k)=>{
 			let mesh = new Cube(checkParams(o));
 			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
-			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
-			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
+			let r = (k%3) * 10 + radii;
+			let x = r * Math.cos(THREE.Math.degToRad(k * unit));
+			let z = r * Math.sin(THREE.Math.degToRad(k * unit));
 			let y = (k%2==0)?15:-15;
 			mesh.aim(x, y, z);
 			_objects.push(mesh);
@@ -228,7 +229,6 @@ var main = function(container){
 			});
 			var obj = intersects[ 0 ];
 			let s = createjs.Sound.play("BGmusic_" + obj.name);
-			console.log(s);
 			_this.dispatchEvent({ type: Event.CUBE_CLICK, data:obj});
 		}
 	}
