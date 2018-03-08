@@ -36,17 +36,21 @@ html,body {
 	top:0;
 	z-index: 101;
 }
-#ar-result-jeans{
+#ar-result-guide{
 	position: fixed;
 	z-index: 102;
 	bottom: 0;
 	text-align: center;
 }
-#ar-result-jeans .slogan{
+#ar-result-guide img{
 	width: 100%;
 }
-#ar-result-jeans .btn{
+#ar-result-guide .slogan{
+	width: 100%;
+}
+#ar-result-guide .btn{
 	width: 70%;
+	margin: 0 auto;
 }
 #ar-back-btn{
 	position: fixed;

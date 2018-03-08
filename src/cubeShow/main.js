@@ -18,7 +18,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.2.3";
+const VER = "1.2.4";
 /**
  *	事件
  */
@@ -88,20 +88,23 @@ var main = function(container){
 	_this.launch = function(){
 		createBox();
 		let arr = require('./cubes.json');
-		arr = arr.concat(arr, arr, arr);
+		let tmp = [null,null,null];
+		arr = arr.concat(tmp,arr,tmp, arr,tmp);
 		let len = arr.length;
 		let unit = 360/len;
 		let radii = 50;
 		arr.forEach((o, k)=>{
-			let mesh = new Cube(checkParams(o));
-			mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
-			let r = (k%3) * 10 + radii;
-			let x = r * Math.cos(THREE.Math.degToRad(k * unit));
-			let z = r * Math.sin(THREE.Math.degToRad(k * unit));
-			let y = (k%2==0)?15:-15;
-			mesh.aim(x, y, z);
-			_objects.push(mesh);
-			__cubes.add(mesh);
+			if(o) {
+				let mesh = new Cube(checkParams(o));
+				mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
+				let r = (k%3) * 10 + radii;
+				let x = r * Math.cos(THREE.Math.degToRad(k * unit));
+				let z = r * Math.sin(THREE.Math.degToRad(k * unit));
+				let y = (k%2==0)?15:-15;
+				mesh.aim(x, y, z);
+				_objects.push(mesh);
+				__cubes.add(mesh);
+			}
 		})
 	};
 	_this.replay = function(){
@@ -131,7 +134,11 @@ var main = function(container){
 			if(param[k].hasOwnProperty("map")){
 				let id = param.name;
 				if(param[k].map) id += '-' + param[k].map;
-				let map = new THREE.Texture(Preload.getResult(id));
+				let canvas = document.createElement("canvas");
+				canvas.width = canvas.height = 512;
+				let x = 0;
+				canvas.getContext("2d").drawImage(Preload.getResult(id), x,0);
+				let map = new THREE.CanvasTexture(canvas);
 				map.needsUpdate = true;
 				param[k].map = map;
 			}
@@ -147,8 +154,8 @@ var main = function(container){
 			name:"Uniqlo",
 			front:{map:null},
 			back:{map:null},
-			left:{color:"white",opacity:0.9},
-			right:{color:"white",opacity:0.9},
+			left:{map:null},
+			right:{map:null},
 			top:null,
 			bottom:{color:"white",opacity:0.7}
 		}

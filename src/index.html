@@ -18,15 +18,13 @@
 			<div class="arrow-right"><img src="./images/page/arrow.png"/></div>
 			<div class="tips"><img src="./images/page/tips.png"/></div>
 		</div>
-		<div id="ar-recognition-result">
-			<div id="ar-result-dryex" style="display:none">
-			</div>
-			<div id="ar-result-cartoon" style="display:none">
+		<div id="ar-recognition-result" style="display:none">
+			<div id="ar-result-cartoon">
 				<canvas id="ar-cartoon" width="720" height="1560" style="width:100%;height:100%"></canvas>
 			</div>
-			<div id="ar-result-jeans" style="display:none">
-				<img class="slogan" src="./images/paper/slogan.png"/>
-				<a href="#"><img class="btn" src="./images/paper/btn.png"/></a>
+			<div id="ar-result-guide">
+				<div class="slogan"><img src="./images/paper/slogan.png"/></div>
+				<div class="btn"><a href="#"><img src="./images/paper/btn.png"/></a></div>
 			</div>
 		</div>
 	</div>
@@ -57,31 +55,27 @@ function onLaunch(){
 	document.getElementById("ar-index").style.display = "none";
 	document.getElementById('ar-panel').style.display = '';
 	document.getElementById('ar-info').style.display = '';
-	document.getElementById('ar-back-btn').addEventListener("click", onback);
-	document.getElementById("ar-recognition").style.display = "";	
+	document.getElementById('ar-back-btn').addEventListener("click", onback);	
+	document.getElementById("ar-recognition").style.display = "";
 	_game.launch();
 }
 function onback(){
 	document.getElementById('ar-info').style.display = '';
 	document.getElementById('ar-back-btn').style.display = 'none';
-	document.getElementById("ar-result-jeans").style.display = "none";
-	document.getElementById("ar-result-dryex").style.display = "none";
-	document.getElementById("ar-result-cartoon").style.display = "none";
+	document.getElementById("ar-recognition-result").style.display = "none";
 	_game.replay()
 }
 function onCubeClick(e){
 	document.getElementById('ar-info').style.display = 'none';
 	document.getElementById('ar-back-btn').style.display = '';
+	document.getElementById("ar-recognition-result").style.display = "";
+	document.getElementById('ar-result-cartoon').style.display = '';
 	if(e.data.name == "Jeans"){
 		_game.paper();
-		document.getElementById("ar-result-jeans").style.display = "";
-	}else if(e.data.name == "DryEX"){
-		document.getElementById("ar-result-dryex").style.display = "";
-		document.getElementById("ar-result-dryex").appendChild(CubeShow.frame);
-		CubeShow.frame.run();
-	}else if(e.data.name == "UT"){
-		document.getElementById("ar-result-cartoon").style.display = "";
+		document.getElementById('ar-result-cartoon').style.display = 'none';
+	}else{
 		_cartoon.ut();
+		
 	}
 }
 	</script>
