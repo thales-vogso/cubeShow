@@ -24,12 +24,9 @@
 			</div>
 			<div id="ar-result-guide">
 				<div class="slogan"><img src="./images/paper/slogan.png"/></div>
-				<div class="btn"><a href="#"><img src="./images/paper/btn.png"/></a></div>
+				<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
 			</div>
 		</div>
-	</div>
-	<div id="ar-panel" style="z-index:102;display:none;">
-		
 	</div>
 	<div id="ar-back-btn" style="display:none" ><img class="slogan" src="./images/page/back.png"/></div>
 	<script>
@@ -53,7 +50,6 @@ function complete(){
 }
 function onLaunch(){
 	document.getElementById("ar-index").style.display = "none";
-	document.getElementById('ar-panel').style.display = '';
 	document.getElementById('ar-info').style.display = '';
 	document.getElementById('ar-back-btn').addEventListener("click", onback);	
 	document.getElementById("ar-recognition").style.display = "";
@@ -75,7 +71,6 @@ function onCubeClick(e){
 		document.getElementById('ar-result-cartoon').style.display = 'none';
 	}else{
 		_cartoon.ut();
-		
 	}
 }
 	</script>

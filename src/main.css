@@ -17,15 +17,6 @@ html,body {
 	display: block;
 }
 
-#ar-panel {
-	position: fixed;
-	top: 88%;
-	left: 4%;
-	bottom: 2%;
-	width: 92%;
-	height: 10%;
-	background: transparent;
-}
 #ar-game{
 	position: relative;
 	z-index: 100;

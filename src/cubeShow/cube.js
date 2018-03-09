@@ -7,6 +7,7 @@ var Cube = function(param){
 	const WIDTH = 10,	//尺寸
 		SEGMENTS = 1,	//横断面
 		FADE_DURATION = 1000,	//淡入淡出间隔
+		IMG_WIDTH = 512,
 		RISE_Y = 50,	//上升位置
 		SCALE_MIN = 0.4,
 		SCALE_MAX = 1,
@@ -47,11 +48,38 @@ var Cube = function(param){
 	function getMaterial(p){
 		let m = null;
 		if(p){
-			p.side = THREE.DoubleSide;
-			p.transparent = true;
-			m = new THREE.MeshBasicMaterial( p );
+			let param = {side: THREE.DoubleSide, transparent: true};
+			for(let k in p){
+				param[k] = p[k];
+			}
+			if(p.hasOwnProperty("map")){
+				let id = _this.name;
+				if(p.map) id += '-' + p.map;
+				let canvas = document.createElement("canvas");
+				canvas.width = canvas.height = IMG_WIDTH;
+				let map = new THREE.CanvasTexture(canvas);
+				motion(map, canvas, CubeShow.Preload.getResult(id));
+				param.map = map;
+			}
+			m = new THREE.MeshBasicMaterial( param );
 		}
 		return m;
+	}
+	function motion(map, canvas, img){
+		canvas.getContext("2d").drawImage(img, 0,0);
+		map.needsUpdate = true;
+		if(img.width > IMG_WIDTH){
+			let x = 0;
+			let sid = setInterval(()=>{
+				canvas.getContext("2d").drawImage(img, x,0);
+				map.needsUpdate = true;
+				if(x <= -img.width){
+					x = 0;
+				}else{
+					x -= IMG_WIDTH;
+				}
+			}, 500);
+		}
 	}
 	_this.raycast = function( raycaster, intersects ){
 		if(_enable && raycaster.ray.distanceToPoint(_this.position) < WIDTH/2){

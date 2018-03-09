@@ -95,7 +95,7 @@ var main = function(container){
 		let radii = 50;
 		arr.forEach((o, k)=>{
 			if(o) {
-				let mesh = new Cube(checkParams(o));
+				let mesh = new Cube(o);
 				mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
 				let r = (k%3) * 10 + radii;
 				let x = r * Math.cos(THREE.Math.degToRad(k * unit));
@@ -115,37 +115,6 @@ var main = function(container){
 		_this.launch();
 	};
 	/**
-	 * 检测参数
-	 * @param {*} obj 
-	 */
-	function checkParams(obj){
-		var param = {};
-		for(let k in obj){
-			if(!obj[k]) continue;
-			if( typeof(obj[k]) == "object") {
-				var o = {};
-				for(let i in obj[k]){
-					o[i] = obj[k][i];
-				}
-				param[k] = o;
-			}else{
-				param[k] = obj[k];
-			}
-			if(param[k].hasOwnProperty("map")){
-				let id = param.name;
-				if(param[k].map) id += '-' + param[k].map;
-				let canvas = document.createElement("canvas");
-				canvas.width = canvas.height = 512;
-				let x = 0;
-				canvas.getContext("2d").drawImage(Preload.getResult(id), x,0);
-				let map = new THREE.CanvasTexture(canvas);
-				map.needsUpdate = true;
-				param[k].map = map;
-			}
-		}
-		return param;
-	}
-	/**
 	 * 创建方盒
 	 */
 	function createBox(){
@@ -159,7 +128,7 @@ var main = function(container){
 			top:null,
 			bottom:{color:"white",opacity:0.7}
 		}
-		__box = new Cube(checkParams(obj));
+		__box = new Cube(obj);
 		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
 		__box.fadeIn();
 		__scene.add(__box);
