@@ -45,6 +45,14 @@ var load = function(progress, complete){
 	_queue.load();
 };
 /**
+ * 添加
+ * @param {*} arr 图片数组
+ */
+var add = function(arr){
+	_queue.loadManifest(arr, false);
+	_queue.load();
+};
+/**
  *	获取loader
 */
 var getQueue = function(){

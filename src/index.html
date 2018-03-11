@@ -62,14 +62,17 @@ function onback(){
 	_game.replay()
 }
 function onCubeClick(e){
+	let name = e.data.name;
 	document.getElementById('ar-info').style.display = 'none';
 	document.getElementById('ar-back-btn').style.display = '';
 	document.getElementById("ar-recognition-result").style.display = "";
 	document.getElementById('ar-result-cartoon').style.display = '';
-	if(e.data.name == "Jeans"){
+	document.querySelector("#ar-result-guide .slogan img").src = "images/" + name + "-slogan.png";
+	if(name == "Jeans"){
 		_game.paper();
 		document.getElementById('ar-result-cartoon').style.display = 'none';
 	}else{
+		//CubeShow.Preload.add({id:"ut_atlas_", src:"ut_atlas_"});
 		_cartoon.ut();
 	}
 }
