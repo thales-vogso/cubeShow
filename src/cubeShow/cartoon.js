@@ -1,6 +1,14 @@
-import ut from "./ut";
-var comp=ut.getComposition("612B420ECEAD334B968E49A9CCF0AEAA");
-var lib=comp.getLibrary();
+window.AdobeAn = {};
+
+
+require("../video/DPJ");
+require("../video/Dress");
+require("../video/DryEX");
+require("../video/kando");
+require("../video/Kids");
+require("../video/UT");
+
+
 /**
  *	主类，继承create.Stage
  *	@param	canvas	主体或者名称
@@ -26,15 +34,23 @@ var Cartoon = function(canvas){
 		_this.addChild(__game, __surface);
 		_this.on("tick", onTick);
 	};
-	_this.ut = function(){
+	_this.play = function(name){
+		console.log(name);
+		flaPlay(name);
+	};
+	function flaPlay(name){
+		_this.removeAllChildren();
+		var comp=AdobeAn.getComposition(name);
+		console.log(comp, AdobeAn);
+		var lib=comp.getLibrary();
 		var ss=comp.getSpriteSheet();
 		var ssMetadata = lib.ssMetadata;
 		for(let i=0; i<ssMetadata.length; i++) {
 			ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [CubeShow.Preload.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
 		}
-		let mc = new lib.ut();
+		let mc = new lib[name]();
 		_this.addChild(mc);
-	};
+	}
 	
 	function onTick (e) {
 		

@@ -22,6 +22,17 @@ imgContext.keys().map(imgContext).forEach((src) => {
 	o.src = src;
 	_images.push(o);
 });
+
+var atlasContext = require.context("../video/images", true, /^\.\/.*\.(png|jpg|gif)$/);
+const atlasPattern = /\/images\-(.*)\.png$/;
+atlasContext.keys().map(atlasContext).forEach((src) => {
+	let o = {};
+	let arr = src.match(atlasPattern);
+	let name = arr[1];
+	o.id = name;
+	o.src = src;
+	_images.push(o);
+});
 /**
  *	预先加载
  */

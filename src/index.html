@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<div id="ar-loading">loading...</div>
+	<div id="ar-loading"></div>
 	<div id="ar-index" style="z-index:99;display:none;">
 		<a href="javascript:;">launch</a>
 	</div>
@@ -23,7 +23,7 @@
 				<canvas id="ar-cartoon" width="720" height="1560" style="width:100%;height:100%"></canvas>
 			</div>
 			<div id="ar-result-guide">
-				<div class="slogan"><img src="./images/paper/slogan.png"/></div>
+				<div class="slogan"><img src=""/></div>
 				<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
 			</div>
 		</div>
@@ -37,7 +37,7 @@ window.addEventListener('load', function(e){
 	CubeShow.Preload.load(progress, complete);
 });
 function progress(e){
-	document.getElementById("ar-loading").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
+	//document.getElementById("ar-loading").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
 }
 function complete(){
 	var game = document.getElementById("ar-game");
@@ -73,7 +73,7 @@ function onCubeClick(e){
 		document.getElementById('ar-result-cartoon').style.display = 'none';
 	}else{
 		//CubeShow.Preload.add({id:"ut_atlas_", src:"ut_atlas_"});
-		_cartoon.ut();
+		_cartoon.play(name);
 	}
 }
 	</script>
