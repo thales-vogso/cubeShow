@@ -7,7 +7,10 @@
 </head>
 
 <body>
-	<div id="ar-loading"></div>
+	<div id="ar-loading">
+		<div class="loadingbar"></div>
+		<div class="percent">loading...</div>
+	</div>
 	<div id="ar-index" style="z-index:99;display:none;">
 		<a href="javascript:;">launch</a>
 	</div>
@@ -37,7 +40,7 @@ window.addEventListener('load', function(e){
 	CubeShow.Preload.load(progress, complete);
 });
 function progress(e){
-	//document.getElementById("ar-loading").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
+	document.querySelector("#ar-loading .percent").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
 }
 function complete(){
 	var game = document.getElementById("ar-game");

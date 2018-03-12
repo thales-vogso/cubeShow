@@ -1,4 +1,5 @@
 import * as TWEEN from "es6-tween";
+import Texture from "./texture";
 /**
  *	方盒
  */
@@ -55,11 +56,7 @@ var Cube = function(param){
 			if(p.hasOwnProperty("map")){
 				let id = _this.name;
 				if(p.map) id += '-' + p.map;
-				let canvas = document.createElement("canvas");
-				canvas.width = canvas.height = IMG_WIDTH;
-				let map = new THREE.CanvasTexture(canvas);
-				motion(map, canvas, CubeShow.Preload.getResult(id));
-				param.map = map;
+				param.map = new Texture(CubeShow.Preload.getResult(id));
 			}
 			m = new THREE.MeshBasicMaterial( param );
 		}

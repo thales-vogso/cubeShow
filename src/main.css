@@ -10,14 +10,22 @@ html,body {
 }
 
 #ar-loading{
-	width: 150px;
-	height: 150px;
+	width: 100%;
+	height: 100%;
+	margin: -60px 0 0 -60px;
+	left: 50%;
+	top:50%;
 	position: absolute;
 	z-index: 200;
-	left: 40%;
-	top:40%;
-	background: url("images/page/loading.png");
+}
+#ar-loading .loadingbar{
+	width: 120px;
+	height: 100px;
+	background: url("images/page/loading.jpg");
 	animation: loading-animation 1s steps(22) infinite;
+}
+#ar-loading .percent{
+	font-size: 1rem;
 }
 
 #ar-index {
@@ -129,6 +137,6 @@ html,body {
 		background-position-x: 0;
 	}
 	to {
-		background-position-x: -3300px;
+		background-position-x: -2640px;
 	}
 }

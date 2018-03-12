@@ -26,7 +26,7 @@ var Cartoon = function(canvas){
 	 */
 	_this.init = function(canvas){
 		_this.Stage_constructor(canvas);//继承stage
-		createjs.Ticker.setFPS(FPS);	//帧频
+		createjs.Ticker.setFPS = FPS;	//帧频
 		createjs.Ticker.addEventListener('tick', _this);	//按照帧频更新舞台
 		createjs.Touch.enable(_this);	//启用tauch
 		__game = new createjs.Container();
