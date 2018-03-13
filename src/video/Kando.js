@@ -3,9 +3,9 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"kando_atlas_", frames: [[421,634,226,377],[0,719,388,315],[0,387,419,330],[421,0,291,330],[421,332,320,300],[0,0,369,385]]},
-		{name:"kando_atlas_2", frames: [[0,723,192,323],[593,1026,123,135],[404,720,123,163],[179,459,211,225],[154,1078,231,97],[404,570,120,120],[588,515,114,203],[0,352,177,369],[228,240,235,217],[518,0,185,305],[588,307,129,206],[194,897,229,179],[0,0,226,350],[425,885,147,136],[0,1048,152,161],[465,307,121,261],[194,686,208,209],[228,0,288,238],[425,1023,166,116],[529,720,166,116],[593,838,97,186]]},
-		{name:"kando_atlas_3", frames: [[0,0,119,108],[0,110,153,83]]}
+		{name:"Kando_atlas_", frames: [[421,634,226,377],[0,719,388,315],[0,387,419,330],[421,0,291,330],[421,332,320,300],[0,0,369,385]]},
+		{name:"Kando_atlas_2", frames: [[0,723,192,323],[593,1026,123,135],[404,720,123,163],[179,459,211,225],[154,1078,231,97],[404,570,120,120],[588,515,114,203],[0,352,177,369],[228,240,235,217],[518,0,185,305],[588,307,129,206],[194,897,229,179],[0,0,226,350],[425,885,147,136],[0,1048,152,161],[465,307,121,261],[194,686,208,209],[228,0,288,238],[425,1023,166,116],[529,720,166,116],[593,838,97,186]]},
+		{name:"Kando_atlas_3", frames: [[0,0,119,108],[0,110,153,83]]}
 ];
 
 
@@ -14,203 +14,203 @@ lib.ssMetadata = [
 
 
 (lib.m1 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m2 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m3 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m4 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m5 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(3);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m6 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m7 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m8 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(4);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.m9 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(5);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n1 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(3);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n2 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(6);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n3 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(7);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n4 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(8);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n5 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(9);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n6 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(4);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n7 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(10);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n8 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(11);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.n9 = function() {
-	this.spriteSheet = ss["kando_atlas_"];
+	this.spriteSheet = ss["Kando_atlas_"];
 	this.gotoAndStop(5);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r1 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(12);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r10 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(13);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r11 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(14);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r2 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(15);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r3 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(16);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r4 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(17);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r5 = function() {
-	this.spriteSheet = ss["kando_atlas_3"];
+	this.spriteSheet = ss["Kando_atlas_3"];
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r6 = function() {
-	this.spriteSheet = ss["kando_atlas_3"];
+	this.spriteSheet = ss["Kando_atlas_3"];
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r7 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(18);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r8 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(19);
 }).prototype = p = new cjs.Sprite();
 
 
 
 (lib.r9 = function() {
-	this.spriteSheet = ss["kando_atlas_2"];
+	this.spriteSheet = ss["Kando_atlas_2"];
 	this.gotoAndStop(20);
 }).prototype = p = new cjs.Sprite();
 // helper functions:
@@ -814,7 +814,7 @@ p.nominalBounds = new cjs.Rectangle(0,0,516.6,671.8);
 
 
 // stage content:
-(lib.kando = function(mode,startPosition,loop) {
+(lib.Kando = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// 3
@@ -852,9 +852,9 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/kando_atlas_.png?1520945269695", id:"kando_atlas_"},
-		{src:"images/kando_atlas_2.png?1520945269696", id:"kando_atlas_2"},
-		{src:"images/kando_atlas_3.png?1520945269697", id:"kando_atlas_3"}
+		{src:"images/Kando_atlas_.png?1520951185504", id:"Kando_atlas_"},
+		{src:"images/Kando_atlas_2.png?1520951185504", id:"Kando_atlas_2"},
+		{src:"images/Kando_atlas_3.png?1520951185504", id:"Kando_atlas_3"}
 	],
 	preloads: []
 };
@@ -892,7 +892,7 @@ an.bootstrapCallback=function(fnCallback) {
 };
 
 an.compositions = an.compositions || {};
-an.compositions['kando'] = {
+an.compositions['Kando'] = {
 	getStage: function() { return exportRoot.getStage(); },
 	getLibrary: function() { return lib; },
 	getSpriteSheet: function() { return ss; },

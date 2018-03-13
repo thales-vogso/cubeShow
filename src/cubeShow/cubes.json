@@ -45,7 +45,7 @@
 		"bottom":{"color":"white","opacity":0.7}
 	},
 	{
-		"name":"kando",
+		"name":"Kando",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},

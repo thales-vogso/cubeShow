@@ -219,7 +219,7 @@ var main = function(container){
 				o.fadeOut();
 			});
 			var obj = intersects[ 0 ];
-			let s = createjs.Sound.play("BGmusic_" + obj.name);
+			let s = createjs.Sound.play("BGmusic_" + obj.name, {delay:2000});
 			_this.dispatchEvent({ type: Event.CUBE_CLICK, data:obj});
 		}
 	}
