@@ -10,7 +10,7 @@ var Cube = function(param){
 		FADE_DURATION = 1000,	//淡入淡出间隔
 		IMG_WIDTH = 512,
 		RISE_Y = 50,	//上升位置
-		SCALE_MIN = 0.4,
+		SCALE_MIN = 0.2,
 		SCALE_MAX = 1,
 		FLY_DURATION = 800,	//下降间隔
 		ROTATION = -Math.PI/2,	//旋转角度
@@ -132,6 +132,8 @@ var Cube = function(param){
 	 * 淡入
 	 */
 	_this.fadeIn = function(){
+		_this.visible = true;
+		_enable = true;
 		__entity.scale.set(0.1,0.1,0.1);
 		let tween = new TWEEN.Tween(__entity.scale)
 			.to({x:1,y:1,z:1}, FADE_DURATION)

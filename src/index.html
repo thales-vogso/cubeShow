@@ -11,31 +11,31 @@
 		<div class="loadingbar"></div>
 		<div class="percent">loading...</div>
 	</div>
-	<div id="ar-index" style="z-index:99;display:none;">
-		<a href="javascript:;">launch</a>
+	<div id="ar-video" style="display:none">
+		<video id="video" class="video" autoplay=""></video>
+		<canvas id="canvas" style="position:absolute;left:0px;top:0px;"></canvas>
 	</div>
-	<div id="ar-recognition" style="z-index:99;display:none;">
-		<canvas id="ar-game"></canvas>
-		<div id="ar-info">
+	<div id="ar-webgl" style="display:none">
+		<canvas id="ar-webgl-game"></canvas>
+		<div class="info">
 			<div class="arrow-left"><img src="./images/page/arrow.png"/></div>
 			<div class="arrow-right"><img src="./images/page/arrow.png"/></div>
 			<div class="tips"><img src="./images/page/tips.png"/></div>
 		</div>
-		<div id="ar-recognition-result" style="display:none">
-			<div id="ar-result-cartoon">
-				<canvas id="ar-cartoon" width="720" height="1560" style="width:100%;height:100%"></canvas>
-			</div>
-			<div id="ar-result-guide">
-				<div class="slogan"><img src=""/></div>
-				<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
-			</div>
-		</div>
 	</div>
-	<div id="ar-back-btn" style="display:none" ><img class="slogan" src="./images/page/back.png"/></div>
+	<div id="ar-create" style="display:none">
+		<canvas id="ar-create-game" width="640" height="1042" style="width:100%;height:100%"></canvas>
+		<div class="guide">
+			<div class="slogan"><img src=""/></div>
+			<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
+		</div>
+		<div class="back-btn" style="display:none" ><img src="./images/page/back.png"/></div>
+	</div>
 	<script>
 		
 var _game = null,
-	_cartoon = null;
+	_cartoon = null,
+	_guideListener = null;
 window.addEventListener('load', function(e){
 	CubeShow.Preload.load(progress, complete);
 });
@@ -43,39 +43,52 @@ function progress(e){
 	document.querySelector("#ar-loading .percent").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
 }
 function complete(){
-	var game = document.getElementById("ar-game");
-	_game = new CubeShow.main(game);
+	_game = new CubeShow.main(document.getElementById("ar-webgl-game"));
 	_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
-	_cartoon = new CubeShow.Cartoon(document.getElementById("ar-cartoon"));
+	_cartoon = new CubeShow.Cartoon(document.getElementById("ar-create-game"));
+	document.querySelector('#ar-create .back-btn').addEventListener("click", onback);	
 	document.getElementById("ar-loading").style.display = "none";
-	document.getElementById("ar-index").style.display = "";
-	document.getElementById("ar-index").addEventListener("click", onLaunch);
+	guide();
 }
-function onLaunch(){
-	document.getElementById("ar-index").style.display = "none";
-	document.getElementById('ar-info').style.display = '';
-	document.getElementById('ar-back-btn').addEventListener("click", onback);	
-	document.getElementById("ar-recognition").style.display = "";
+function guide(){
+	document.getElementById("ar-create").style.display = "";
+	document.querySelector('#ar-create .back-btn').style.display = 'none';
+	document.querySelector('#ar-create .guide').style.display = 'none';
+	document.getElementById('ar-webgl').style.display = 'none';
+	_cartoon.play("LC");
+	_guideListener = _cartoon.getChildAt(0).on("tick", onGuideTick);
+}
+function onGuideTick(e){
+	let mc = e.target;
+	if(mc.currentFrame >= mc.totalFrames){
+		_cartoon.getChildAt(0).off("tick", _guideListener);
+		launch();
+	}
+}
+function launch(){
+	document.getElementById("ar-create").style.display = "none";
+	document.getElementById('ar-webgl').style.display = '';
+	document.querySelector('#ar-create .back-btn').style.display = '';
+	document.querySelector('#ar-create .guide').style.display = '';
 	_game.launch();
 }
 function onback(){
-	document.getElementById('ar-info').style.display = '';
-	document.getElementById('ar-back-btn').style.display = 'none';
-	document.getElementById("ar-recognition-result").style.display = "none";
+	document.getElementById("ar-create").style.display = "none";
+	document.getElementById('ar-webgl').style.display = '';
+	_cartoon.clear();
 	_game.replay()
 }
 function onCubeClick(e){
 	let name = e.data.name;
-	document.getElementById('ar-info').style.display = 'none';
-	document.getElementById('ar-back-btn').style.display = '';
-	document.getElementById("ar-recognition-result").style.display = "";
-	document.getElementById('ar-result-cartoon').style.display = '';
-	document.querySelector("#ar-result-guide .slogan img").src = "images/" + name + "-slogan.png";
+	document.getElementById("ar-create").style.display = "";
+	document.getElementById("ar-create-game").style.display = "";
+	document.getElementById('ar-webgl').style.display = 'none';
+	document.querySelector("#ar-create .guide .slogan img").src = "images/" + name + "-slogan.png";
 	if(name == "Jeans"){
 		_game.paper();
-		document.getElementById('ar-result-cartoon').style.display = 'none';
+		document.getElementById('ar-webgl').style.display = '';
+		document.getElementById("ar-create-game").style.display = "none";
 	}else{
-		//CubeShow.Preload.add({id:"ut_atlas_", src:"ut_atlas_"});
 		_cartoon.play(name);
 	}
 }

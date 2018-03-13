@@ -998,8 +998,7 @@ p.nominalBounds = new cjs.Rectangle(-91.8,301.1,68.9,153.8);
 p.nominalBounds = new cjs.Rectangle(-37.1,293,24,56.4);
 
 
-// stage content:
-(lib.Dress = function(mode,startPosition,loop) {
+(lib.qq = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// 图层_9
@@ -1058,17 +1057,32 @@ p.nominalBounds = new cjs.Rectangle(-37.1,293,24,56.4);
 	this.timeline.addTween(cjs.Tween.get(this.instance_6).wait(305));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(295,610.5,1139.1,1126.6);
+p.nominalBounds = new cjs.Rectangle(-80,0,1139.1,1126.6);
+
+
+// stage content:
+(lib.Dress = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// 图层_1
+	this.instance = new lib.qq("synched",0);
+	this.instance.parent = this;
+	this.instance.setTransform(100.2,76.5,0.711,0.711,0,0,0,116.3,43.5);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(306));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(280.5,521,810.4,847);
 // library properties:
 lib.properties = {
-	id: 'D22724478E017549A75D92FA37E0B959',
-	width: 750,
-	height: 1221,
-	fps: 25,
+	id: '55CDE404E4141F46BCDECA51667D7FE6',
+	width: 640,
+	height: 1042,
+	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/Dress_atlas_.png?1520587042899", id:"Dress_atlas_"}
+		{src:"images/Dress_atlas_.png?1520944650694", id:"Dress_atlas_"}
 	],
 	preloads: []
 };

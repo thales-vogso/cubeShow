@@ -12,7 +12,23 @@ lib.ssMetadata = [];
 (lib._1 = function() {
 	this.initialize(img._1);
 }).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,320,429);
+p.nominalBounds = new cjs.Rectangle(0,0,320,429);// helper functions:
+
+function mc_symbol_clone() {
+	var clone = this._cloneProps(new this.constructor(this.mode, this.startPosition, this.loop));
+	clone.gotoAndStop(this.currentFrame);
+	clone.paused = this.paused;
+	clone.framerate = this.framerate;
+	return clone;
+}
+
+function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
+	var prototype = cjs.extend(symbol, cjs.MovieClip);
+	prototype.clone = mc_symbol_clone;
+	prototype.nominalBounds = nominalBounds;
+	prototype.frameBounds = frameBounds;
+	return prototype;
+	}
 
 
 (lib.liyupingli_1_14_27390 = function(mode,startPosition,loop) {
@@ -101,6 +117,19 @@ p.nominalBounds = new cjs.Rectangle(-194.9,-262.3,400.4,524.6);
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-277.1,-183.9,554.3,441.6);
+
+
+(lib.元件6 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// 图层_1
+	this.instance = new lib._1();
+	this.instance.parent = this;
+	this.instance.setTransform(0,0,0.825,0.825);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+}).prototype = getMCSymbolPrototype(lib.元件6, new cjs.Rectangle(0,0,264,353.9), null);
 
 
 (lib.元件1 = function(mode,startPosition,loop) {
@@ -381,12 +410,12 @@ p.nominalBounds = new cjs.Rectangle(-749.9,-269.9,313.1,353.9);
 (lib.元件2 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
-	// 图层_1
-	this.instance = new lib.元件1("synched",0);
+	// 图层_5
+	this.instance = new lib.元件6();
 	this.instance.parent = this;
-	this.instance.setTransform(404.3,364.5,0.055,0.055,0,0,0,131.9,176.8);
+	this.instance.setTransform(404.6,361.9,1,1,0,0,0,132.1,177);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).to({regY:177,scaleX:3.81,scaleY:3.81,guide:{path:[404.3,364.5,324.5,1186.9,-760.4,1232.7]}},19).to({_off:true},75).wait(3));
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({scaleX:1.15,scaleY:1.15,x:392.8,y:446.8},0).wait(1).to({scaleX:1.3,scaleY:1.3,x:375.4,y:527.5},0).wait(1).to({scaleX:1.44,scaleY:1.44,x:352.2,y:603.7},0).wait(1).to({scaleX:1.59,scaleY:1.59,x:323.5,y:675.6},0).wait(1).to({scaleX:1.74,scaleY:1.74,x:289.1,y:743.1},0).wait(1).to({scaleX:1.89,scaleY:1.89,x:249,y:806.3},0).wait(1).to({scaleX:2.04,scaleY:2.04,x:203.2,y:865.2},0).wait(1).to({scaleX:2.19,scaleY:2.19,x:151.9,y:919.8},0).wait(1).to({scaleX:2.33,scaleY:2.33,x:94.8,y:969.9},0).wait(1).to({scaleX:2.48,scaleY:2.48,x:32.2,y:1015.8},0).wait(1).to({scaleX:2.63,scaleY:2.63,x:-36.1,y:1057.4},0).wait(1).to({scaleX:2.78,scaleY:2.78,x:-110.1,y:1094.6},0).wait(1).to({scaleX:2.93,scaleY:2.93,x:-189.9,y:1127.5},0).wait(1).to({scaleX:3.07,scaleY:3.07,x:-275.2,y:1156.1},0).wait(1).to({scaleX:3.22,scaleY:3.22,x:-366.2,y:1180.3},0).wait(1).to({scaleX:3.37,scaleY:3.37,x:-462.8,y:1200.3},0).wait(1).to({scaleX:3.52,scaleY:3.52,x:-565.2,y:1215.8},0).wait(1).to({scaleX:3.67,scaleY:3.67,x:-673.3,y:1227},0).wait(1).to({scaleX:3.81,scaleY:3.81,x:-787,y:1234},0).wait(74).to({_off:true},1).wait(3));
 
 	// 图层_4
 	this.shape = new cjs.Shape();
@@ -613,14 +642,13 @@ p.nominalBounds = new cjs.Rectangle(-749.9,-269.9,313.1,353.9);
 	this.instance_1.setTransform(371.8,546.4,1,1,0,0,0,596.1,556.1);
 	this.instance_1.alpha = 0;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({alpha:1,startPosition:6},6).to({_off:true},88).wait(3));
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({alpha:1,startPosition:6},6).to({startPosition:19},13).to({_off:true},75).wait(3));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(114.7,272.7,554.3,524.6);
+p.nominalBounds = new cjs.Rectangle(114.7,184.9,554.3,612.4);
 
 
-// stage content:
-(lib.Kids = function(mode,startPosition,loop) {
+(lib._11111111 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// 3
@@ -647,17 +675,32 @@ p.nominalBounds = new cjs.Rectangle(114.7,272.7,554.3,524.6);
 	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(94));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(490.4,841.2,554.3,524.6);
+p.nominalBounds = new cjs.Rectangle(115.4,142.9,554.3,612.4);
+
+
+// stage content:
+(lib.Kids = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// 图层_1
+	this.instance = new lib._11111111("synched",0);
+	this.instance.parent = this;
+	this.instance.setTransform(-28.9,17.9,1,1,0,0,0,7,68.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(94));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(399.5,613.4,554.3,612.4);
 // library properties:
 lib.properties = {
-	id: '2DFFA734F7A7E546985827833F3F6F60',
-	width: 750,
-	height: 1221,
+	id: 'D69683AA945AEC4F8755A1465348FF8C',
+	width: 640,
+	height: 1042,
 	fps: 24,
-	color: "#996666",
+	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/_1.png?1520587237776", id:"_1"}
+		{src:"images/_1.png?1520947397471", id:"_1"}
 	],
 	preloads: []
 };

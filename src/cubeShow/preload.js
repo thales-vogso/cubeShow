@@ -17,7 +17,6 @@ imgContext.keys().map(imgContext).forEach((src) => {
 	let arr = src.match(pattern);
 	let name = arr[1];
 	if(name == "box-Uniqlo") name = "Uniqlo";
-	if(name == "easel-ut_atlas_") name = "ut_atlas_";
 	o.id = name;
 	o.src = src;
 	_images.push(o);
@@ -33,6 +32,10 @@ atlasContext.keys().map(atlasContext).forEach((src) => {
 	o.src = src;
 	_images.push(o);
 });
+
+
+//var atlasContext = require.context("../video/lc", true, /^\.\/.*\.(png|jpg|gif)$/);
+//atlasContext.keys().map(atlasContext)
 /**
  *	预先加载
  */

@@ -21,90 +21,96 @@ html,body {
 #ar-loading .loadingbar{
 	width: 120px;
 	height: 100px;
-	background: url("images/page/loading.jpg");
+	background: url("images/page/loading.png");
 	animation: loading-animation 1s steps(22) infinite;
 }
 #ar-loading .percent{
-	font-size: 1rem;
+	width: 120px;
+	text-align: center;
+	font-size: 0.5rem;
 }
 
-#ar-index {
-	width: 100%;
-	height: 100%;
-	background: white;
-	position: relative;
-	display: block;
+#ar-video{
+	width:100%;
+	height:100%;
+	z-index:1;
 }
 
-#ar-game{
-	position: relative;
-	z-index: 100;
-}
-#ar-recognition-result{
+#ar-webgl{
 	position: absolute;
 	left:0;
 	top:0;
-	z-index: 101;
+	z-index: 2;
 }
-#ar-result-guide{
-	position: fixed;
-	z-index: 102;
-	bottom: 0;
-	width:100%;
-	text-align: center;
-}
-#ar-result-guide img{
-	width: 100%;
-}
-#ar-result-guide .slogan{
-	width: 100%;
-}
-#ar-result-guide .btn{
-	width: 70%;
-	margin: 0 auto;
-}
-#ar-back-btn{
-	position: fixed;
-	z-index: 102;
-	top: 0;
-	right: 0;
-	width: 30%
-}
-#ar-back-btn img{
-	width: 100%;
-}
-#ar-info{
+#ar-webgl .info{
 	position: absolute;
-	z-index: 101;
+	z-index:inherit;
 	width: 100%;
 	top:40%;
 	left:0;
 }
-#ar-info .arrow-left{
+#ar-webgl .info .arrow-left{
 	position: absolute;
 	left: 0;
 	top:50%;
 	width: 10%;
 }
-#ar-info .arrow-right{
+#ar-webgl .info .arrow-right{
 	position: absolute;
 	right: 0;
 	top:50%;
 	width: 10%;
 	transform: scale(-1,1);
 }
-#ar-info .arrow-left img, #ar-info .arrow-right img{
+#ar-webgl .info .arrow-left img, #ar-webgl .info .arrow-right img{
 	width: 100%;
 	animation: blink 0.5s ease-in-out infinite alternate;
 }
-#ar-info .tips{
+#ar-webgl .info .tips{
 	position: absolute;
 	text-align: center;
 	width: 100%;
 }
-#ar-info .tips img{
+#ar-webgl .info .tips img{
 	width: 50%
 }
+
+#ar-create{
+	position: absolute;
+	left:0;
+	top:0;
+	z-index: 3;
+}
+#ar-create .guide{
+	position: fixed;
+	z-index: 102;
+	bottom: 5%;
+	width:100%;
+	text-align: center;
+	font-size: 0;
+}
+#ar-create .guide img{
+	width: 100%;
+}
+#ar-create .guide .slogan{
+	width: 50%;
+	margin: 0 auto 5%;
+}
+#ar-create .guide .btn{
+	width: 35%;
+	margin: 0 auto;
+}
+#ar-create .back-btn{
+	position: fixed;
+	z-index: inherit;
+	top: 0;
+	right: 0;
+	width: 30%
+}
+#ar-create .back-btn img{
+	width: 100%;
+}
+
 
 @keyframes myfirst {
 	0% {

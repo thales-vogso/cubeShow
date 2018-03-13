@@ -18,7 +18,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.2.4";
+const VER = "1.4.0";
 /**
  *	事件
  */
@@ -43,6 +43,7 @@ var main = function(container){
 		__scene = null,	//场景
 		__renderer = null,	//渲染器
 		__box = null,	//盒子
+		__peper = null,	//纸片人
 		__cubes = null;	//所有的六面体
 	var _boxIsMove = true;	//方盒运动
 	var _controls = null;	//控制器
@@ -69,7 +70,8 @@ var main = function(container){
 		//__stats = new Stats();
 		//document.body.appendChild(__stats.dom);
 		__cubes = new THREE.Object3D();
-		__scene.add(__cubes);
+		__peper = new THREE.Object3D();
+		__scene.add(__cubes, __peper);
 		_this.control();
 		animate();
 	};
@@ -109,10 +111,18 @@ var main = function(container){
 	};
 	_this.replay = function(){
 		createjs.Sound.stop();
+		__peper.children.forEach((o)=>{
+			o.visible = false;
+		})
+		__cubes.children.forEach((o)=>{
+			o.fadeIn();
+		})
+		/*
 		__scene.remove(__cubes);
 		__cubes = new THREE.Object3D();
 		__scene.add(__cubes);
 		_this.launch();
+		*/
 	};
 	/**
 	 * 创建方盒
@@ -144,8 +154,13 @@ var main = function(container){
 		var delay = 0;
 		for(let k in __cubes.children){
 			let cube = __cubes.children[k];
-			cube.position.copy(__box.position);
-			delay += Math.random() * 200 + 100;
+			let v = new THREE.Vector3(0,0,0);
+			v.copy(__box.position);
+			v.x += Math.random() * 4 -2;
+			v.y += Math.random() * 4 -2;
+			v.z += Math.random() * 4 -2;
+			cube.position.copy(v);
+			delay = Math.random() * 500 + 300;
 			cube.fly(delay);
 		}
 		setTimeout(()=>{__box.fadeOut();}, delay + 1000);
@@ -165,7 +180,7 @@ var main = function(container){
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
 			let y = 0;
 			s.position.set(x, y, z);
-			__cubes.add(s);
+			__peper.add(s);
 		});
 	};
 	function addPaper(id){
