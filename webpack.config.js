@@ -20,7 +20,7 @@ module.exports = {
 			minify:{html5:true},
 			title:'cubeshow'
 		}),
-		//new UglifyJSPlugin(),
+		new UglifyJSPlugin(),
 		new webpack.ProvidePlugin({
 			THREE:"three",
 			createjs:"latest-createjs"
@@ -30,11 +30,11 @@ module.exports = {
 	module:{
 		rules:[
 			{
-				test:/\.css$/,
+				test:/\.css$/i,
 				use:['style-loader','css-loader']
 			},
 			{
-				test: /\.(png|jpg|gif)$/,
+				test: /\.(png|jpe?g|gif)$/i,
 				use: [
 					{
 						loader: 'file-loader',
@@ -42,11 +42,35 @@ module.exports = {
 							regExp: /(\w+)[\/|\\](\w+)\.(png|jpg|gif)/i,
 							name: 'images/[1]-[name].[ext]'
 						}
+					},
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							mozjpeg: {
+								progressive: true,
+								quality: 65
+							},
+							// optipng.enabled: false will disable optipng
+							optipng: {
+								enabled: false,
+							},
+							pngquant: {
+								quality: '65-90',
+								speed: 4
+							},
+							gifsicle: {
+								interlaced: false,
+							},
+							// the webp option will enable WEBP
+							webp: {
+								quality: 75
+							}
+						}
 					}
 				]
 			},
 			{
-				test: /\.(wav|mp3)$/,
+				test: /\.(wav|mp3)$/i,
 				use: [
 					{
 						loader: 'file-loader',
@@ -69,7 +93,8 @@ module.exports = {
 		]
 	},
 	output: {
-		filename: './js/bundle.js',
+		filename: './js/[name].bundle.js',
+		chunkFilename: './js/[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	}
 };
