@@ -8,7 +8,7 @@ var Texture = function(img){
 	var __entity = null;
 	var _clock = null,
 		_last = 0,
-		EXPIRE = 2;
+		_expire = 2;
 	var _step = 0,
 		_index = 0,
 		_unit = 0;
@@ -23,9 +23,12 @@ var Texture = function(img){
 			animate();
 		}
 	};
+	_this.setExpire = function(n){
+		_expire = n;
+	};
 	function motion(){
 		let t = _clock.getElapsedTime();
-		if(t-_last < EXPIRE) return;
+		if(t-_last < _expire) return;
 		_last = t;
 		_this.offset.set(_index * _unit, 0);
 		_index++;

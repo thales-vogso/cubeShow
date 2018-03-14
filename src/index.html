@@ -2,8 +2,15 @@
 <html lang="zh">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="x5-page-mode" content="no-title">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="full-screen" content="true">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="360-fullscreen" content="true">
 	<title>手Q环境AR效果Demo</title>
+	<script type="text/javascript" src="http://js.aq.qq.com/js/aq_common.js"></script>
 </head>
 
 <body>
@@ -26,51 +33,132 @@
 	<div id="ar-create" style="display:none">
 		<canvas id="ar-create-game" width="640" height="1042" style="width:100%;height:100%"></canvas>
 		<div class="guide">
-			<div class="slogan"><img src=""/></div>
+			<div class="slogan"><img src="./images/page/tips.png"/></div>
 			<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
 		</div>
 		<div class="back-btn" style="display:none" ><img src="./images/page/back.png"/></div>
 	</div>
+	<script src="//jsapi.qq.com/get?api=ar.*,event.*,env.version,screen.*"></script>
+	<script type="text/javascript" src="//res.imtt.qq.com/tbs/tbs.js"></script>
+	<script src="//open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
+	<script type="text/javascript" src="//res.imtt.qq.com/WebAR/Release/ARLib_v2.0.js"></script>
+	<script src="//res.imtt.qq.com/component/mtt_qb.min.js"></script>
+
+	<script>
+		var ARLib = window.$ARLib || {};
+		var activityUrl = '';
+		var cameraFacing = 1;
+		var animationFrame, resultCleanTimer = null, pointsCleanTimer = null;
+		var facePoints, featurePoints;
+		var isRecognizeStart = false;
+		var showFeaturePoints = true;
+
+		var QBVer = ARLib.getQQBrowserVersion();
+		var TBSVer = ARLib.getTBSVersion();
+		var isQQBrowser = ARLib.isQQBrowser();
+		var isTBS = ARLib.isTBS();
+		var isIOS = ARLib.isIOS();
+		var isAndroid = ARLib.isAndroid();
+		var isQBInstall = false;
+
+		var resultElement = document.getElementById("ar-recognition-result");
+		var resultImgElement = document.getElementById("ar-recognition-img");
+		var videoElement = document.getElementById("video");
+		var canvasElement = document.getElementById("canvas");
+		var context = canvasElement.getContext("2d");
+
+		if (!isQQBrowser) {
+			mtt.qb.isInstall(function(isInstall) {
+				//isInstall true:已经安装 false:未安装
+				console.log("mtt.qb.isInstall: isInstall=" + isInstall);
+				isQBInstall = isInstall;
+			});
+		}
+
+		function shouldDownloadQQBrowser(title) {
+			var ret = confirm(title);
+			if (ret == true) {
+				var a = document.createElement("a");
+				a.href = "http://mdc.html5.qq.com/d/directdown.jsp?channel_id=10983";
+				a.click();
+				a.remove();
+			} else {
+
+			}
+		}
+
+		function openURLWithQQBrowser() {
+			mtt.qb.openQb({
+				url: window.location.href
+			});
+		}
+	   
+		function goDiscovery() {
+			
+			ARLib.openCamera(cameraFacing, function(ret) {
+				if (ret) {
+					if (isIOS) {
+						//document.body.style.backgroundColor = "white";
+					}
+					if (isAndroid) {
+						document.getElementById('ar-video').style.display = '';
+					}
+				}
+			});
+		}
+	</script>
 	<script>
 		
 var _game = null,
-	_cartoon = null,
-	_guideListener = null;
+	_cartoon = null;
+var _isLoaded = false,
+	_isEnded = false;
 window.addEventListener('load', function(e){
-	CubeShow.Preload.load(progress, complete);
+	guide();
 });
-function progress(e){
+function onProgress(e){
+	document.getElementById("ar-loading").style.display = "";
 	document.querySelector("#ar-loading .percent").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
 }
-function complete(){
-	_game = new CubeShow.main(document.getElementById("ar-webgl-game"));
-	_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
-	_cartoon = new CubeShow.Cartoon(document.getElementById("ar-create-game"));
-	document.querySelector('#ar-create .back-btn').addEventListener("click", onback);	
+function onComplete(e){
 	document.getElementById("ar-loading").style.display = "none";
-	guide();
+}
+function onMcEnd(e){
+	_isEnded = true;
+	goDiscovery();
+	box();
+}
+function onCubeProgress(e){
+	if(_isEnded) onProgress(e);
+}
+function onCubeComplete(e){
+	_isLoaded = true;
+	box();
+}
+function box(){
+	if(_isLoaded && _isEnded){
+		document.getElementById("ar-loading").style.display = "none";
+		_game = new CubeShow.main(document.getElementById("ar-webgl-game"));
+		_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
+		document.querySelector('#ar-create .back-btn').addEventListener("click", onback);
+		document.getElementById("ar-create").style.display = "none";
+		document.getElementById('ar-webgl').style.display = '';
+		document.querySelector('#ar-create .back-btn').style.display = '';
+		document.querySelector('#ar-create .guide').style.display = '';
+		_game.launch();
+	}
 }
 function guide(){
 	document.getElementById("ar-create").style.display = "";
 	document.querySelector('#ar-create .back-btn').style.display = 'none';
 	document.querySelector('#ar-create .guide').style.display = 'none';
 	document.getElementById('ar-webgl').style.display = 'none';
+	_cartoon = new CubeShow.Cartoon(document.getElementById("ar-create-game"));
+	_cartoon.on(CubeShow.Cartoon.Event.IMG_LOADING, onProgress);
+	_cartoon.on(CubeShow.Cartoon.Event.IMG_LOADED, onComplete);
+	_cartoon.on(CubeShow.Cartoon.Event.MC_END, onMcEnd);
 	_cartoon.play("LC");
-	_guideListener = _cartoon.getChildAt(0).on("tick", onGuideTick);
-}
-function onGuideTick(e){
-	let mc = e.target;
-	if(mc.currentFrame >= mc.totalFrames){
-		_cartoon.getChildAt(0).off("tick", _guideListener);
-		launch();
-	}
-}
-function launch(){
-	document.getElementById("ar-create").style.display = "none";
-	document.getElementById('ar-webgl').style.display = '';
-	document.querySelector('#ar-create .back-btn').style.display = '';
-	document.querySelector('#ar-create .guide').style.display = '';
-	_game.launch();
+	CubeShow.Preload.load(onCubeProgress, onCubeComplete);
 }
 function onback(){
 	document.getElementById("ar-create").style.display = "none";
@@ -88,9 +176,7 @@ function onCubeClick(e){
 		_game.paper();
 		document.getElementById('ar-webgl').style.display = '';
 		document.getElementById("ar-create-game").style.display = "none";
-	}else{
-		_cartoon.play(name);
-	}
+	}_cartoon.play(name);
 }
 	</script>
 </body>

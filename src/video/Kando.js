@@ -845,16 +845,16 @@ p.nominalBounds = new cjs.Rectangle(0,0,516.6,671.8);
 p.nominalBounds = null;
 // library properties:
 lib.properties = {
-	id: '0E63E3EA79938C4B840ACCA8440AB60B',
+	id: 'Kando',
 	width: 640,
 	height: 1042,
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/Kando_atlas_.png?1520951185504", id:"Kando_atlas_"},
-		{src:"images/Kando_atlas_2.png?1520951185504", id:"Kando_atlas_2"},
-		{src:"images/Kando_atlas_3.png?1520951185504", id:"Kando_atlas_3"}
+		{src:"images/images-Kando_atlas_.png?1520951185504", id:"Kando_atlas_"},
+		{src:"images/images-Kando_atlas_2.png?1520951185504", id:"Kando_atlas_2"},
+		{src:"images/images-Kando_atlas_3.png?1520951185504", id:"Kando_atlas_3"}
 	],
 	preloads: []
 };

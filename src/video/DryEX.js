@@ -1650,14 +1650,14 @@ p.nominalBounds = new cjs.Rectangle(-488.9,18.8,952.3,673.7);
 p.nominalBounds = new cjs.Rectangle(-66.1,800.5,873.1,524.3);
 // library properties:
 lib.properties = {
-	id: '28D551D6D6F8CE45A807902C4A01125F',
+	id: 'DryEX',
 	width: 640,
 	height: 1042,
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/DryEX_atlas_.png?1520945245285", id:"DryEX_atlas_"}
+		{src:"images/images-DryEX_atlas_.png?1520945245285", id:"DryEX_atlas_"}
 	],
 	preloads: []
 };

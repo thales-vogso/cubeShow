@@ -40,7 +40,11 @@ module.exports = {
 						loader: 'file-loader',
 						options: {
 							regExp: /(\w+)[\/|\\](\w+)\.(png|jpg|gif)/i,
-							name: 'images/[1]-[name].[ext]'
+							//name: 'images/[1]-[name].[ext]'
+							name(file){
+								console.log(file);
+								return 'images/[1]-[name].[ext]';
+							}
 						}
 					},
 					{
@@ -60,10 +64,6 @@ module.exports = {
 							},
 							gifsicle: {
 								interlaced: false,
-							},
-							// the webp option will enable WEBP
-							webp: {
-								quality: 75
 							}
 						}
 					}
@@ -76,6 +76,17 @@ module.exports = {
 						loader: 'file-loader',
 						options: {
 							name: 'sounds/[name].[ext]'
+						}
+					}
+				]
+			},
+			{
+				test: /\.(avi|mp4)$/i,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'video/[name].[ext]'
 						}
 					}
 				]

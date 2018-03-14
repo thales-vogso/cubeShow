@@ -1075,14 +1075,14 @@ p.nominalBounds = new cjs.Rectangle(-80,0,1139.1,1126.6);
 p.nominalBounds = new cjs.Rectangle(280.5,521,810.4,847);
 // library properties:
 lib.properties = {
-	id: '55CDE404E4141F46BCDECA51667D7FE6',
+	id: 'Dress',
 	width: 640,
 	height: 1042,
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/Dress_atlas_.png?1520944650694", id:"Dress_atlas_"}
+		{src:"images/images-Dress_atlas_.png?1520944650694", id:"Dress_atlas_"}
 	],
 	preloads: []
 };

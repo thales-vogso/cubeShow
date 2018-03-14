@@ -1,7 +1,9 @@
-let _sounds = [];
-let _images = [];
+
+
 const pattern = /\/(.*)\.(mp3|png|jpg|gif)$/;
 //声音
+
+let _sounds = [];
 var soundContext = require.context("../sounds/", true, /^\.\/.*\.mp3$/);
 soundContext.keys().map(soundContext).forEach((src) => {
 	let o = {};
@@ -11,6 +13,7 @@ soundContext.keys().map(soundContext).forEach((src) => {
 	_sounds.push(o);
 });
 
+let _images = [];
 var imgContext = require.context("../images", true, /^\.\/.*\/.*\.(png|jpg|gif)$/);
 imgContext.keys().map(imgContext).forEach((src) => {
 	let o = {};
@@ -22,20 +25,6 @@ imgContext.keys().map(imgContext).forEach((src) => {
 	_images.push(o);
 });
 
-var atlasContext = require.context("../video/images", true, /^\.\/.*\.(png|jpg|gif)$/);
-const atlasPattern = /\/images\-(.*)\.png$/;
-atlasContext.keys().map(atlasContext).forEach((src) => {
-	let o = {};
-	let arr = src.match(atlasPattern);
-	let name = arr[1];
-	o.id = name;
-	o.src = src;
-	_images.push(o);
-});
-
-
-//var atlasContext = require.context("../video/lc", true, /^\.\/.*\.(png|jpg|gif)$/);
-//atlasContext.keys().map(atlasContext)
 /**
  *	预先加载
  */

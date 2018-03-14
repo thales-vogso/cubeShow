@@ -1282,14 +1282,14 @@ p.nominalBounds = new cjs.Rectangle(352.3,643.8,13.4,16.8);
 p.nominalBounds = new cjs.Rectangle(639.6,929.8,10.7,13.4);
 // library properties:
 lib.properties = {
-	id: '612B420ECEAD334B968E49A9CCF0AEAA',
+	id: 'UT',
 	width: 640,
 	height: 1042,
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/UT_atlas_.png?1520945334015", id:"UT_atlas_"}
+		{src:"images/images-UT_atlas_.png?1520945334015", id:"UT_atlas_"}
 	],
 	preloads: []
 };

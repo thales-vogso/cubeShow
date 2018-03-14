@@ -2324,14 +2324,14 @@ p.nominalBounds = new cjs.Rectangle(334.4,585.4,63,68.3);
 p.nominalBounds = new cjs.Rectangle(616.7,1036,47.2,51.1);
 // library properties:
 lib.properties = {
-	id: 'F09393A050A42A4E93E76C06980B93A2',
+	id: 'DPJ',
 	width: 640,
 	height: 1042,
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/DPJ_atlas_.png?1520944034675", id:"DPJ_atlas_"}
+		{src:"images/images-DPJ_atlas_.png?1520944034675", id:"DPJ_atlas_"}
 	],
 	preloads: []
 };

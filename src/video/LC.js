@@ -177,13 +177,11 @@ p.nominalBounds = new cjs.Rectangle(-7.3,-7.3,119.1,119.1);
 	this.instance_1 = new lib.元件5();
 	this.instance_1.parent = this;
 	this.instance_1.setTransform(198.3,229.7,0.032,0.032,0,0,0,655.1,328.3);
-	this.instance_1.filters = [new cjs.BlurFilter(56, 56, 3)];
-	this.instance_1.cache(-1344,-1089,6408,2375);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({regX:655.3,regY:327.7,scaleX:0.96,scaleY:0.96,x:198.4},9).to({_off:true},20).wait(181));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-16.6,33.1,514,386);
+p.nominalBounds = new cjs.Rectangle(135.4,185.1,201.9,74.8);
 
 
 (lib.元件3 = function(mode,startPosition,loop) {
@@ -200,13 +198,11 @@ p.nominalBounds = new cjs.Rectangle(-16.6,33.1,514,386);
 	this.instance_1 = new lib.元件1();
 	this.instance_1.parent = this;
 	this.instance_1.setTransform(589.6,826.7,0.016,0.016,0,0,0,183.5,105.7);
-	this.instance_1.filters = [new cjs.BlurFilter(9, 9, 2)];
-	this.instance_1.cache(-1774,-1074,3530,2100);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({regX:182.1,regY:105.8,scaleX:0.89,scaleY:0.89,x:753.7,y:900.9},12).to({regX:182.3,regY:105.9,scaleX:0.96,scaleY:0.96,x:753.8,y:901},28).wait(14));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(538.1,787.8,104,119.5);
+p.nominalBounds = new cjs.Rectangle(541.5,807.8,73.3,99.5);
 
 
 (lib.元件15 = function(mode,startPosition,loop) {
@@ -313,7 +309,7 @@ p.nominalBounds = new cjs.Rectangle(539.3,959.6,1,1);
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(341));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-127.9,-114.3,356,230);
+p.nominalBounds = new cjs.Rectangle(-51.9,-38.3,201.9,74.8);
 
 
 (lib.元件7 = function(mode,startPosition,loop) {
@@ -327,7 +323,7 @@ p.nominalBounds = new cjs.Rectangle(-127.9,-114.3,356,230);
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(128));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,-108.5,87.6,109.5);
+p.nominalBounds = new cjs.Rectangle(0,-98.5,73.3,99.5);
 
 
 (lib.元件16 = function(mode,startPosition,loop) {
@@ -359,7 +355,7 @@ p.nominalBounds = new cjs.Rectangle(0,-108.5,87.6,109.5);
 	this.timeline.addTween(cjs.Tween.get(this.instance_2).to({alpha:1,startPosition:4},4).to({startPosition:41},37).to({alpha:0,startPosition:45},4).to({_off:true},1).wait(263));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(544.4,903.7,87.6,109.6);
+p.nominalBounds = new cjs.Rectangle(544.4,913.7,73.3,99.6);
 
 
 // stage content:
@@ -374,7 +370,7 @@ if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(309));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(642.1,1051.1,57,68.8);
+p.nominalBounds = new cjs.Rectangle(642.3,1061.1,43.3,58.8);
 // library properties:
 lib.properties = {
 	id: 'D279CE1507FE9D49B7F74414332A3CC7',
@@ -384,7 +380,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/LC_atlas_.png?1520941056495", id:"LC_atlas_"}
+		{src:"images/images-LC_atlas_.png", id:"LC_atlas_"}
 	],
 	preloads: []
 };

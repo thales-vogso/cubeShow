@@ -12,13 +12,14 @@ import "three/examples/js/controls/DeviceOrientationControls";
 
 import Cube from "./cube";
 import Cartoon from "./cartoon";
+import Texture from "./texture";
 import * as Preload from "./preload";
 
 
 /**
  *	版本
  */
-const VER = "1.4.0";
+const VER = "1.4.4";
 /**
  *	事件
  */
@@ -45,6 +46,7 @@ var main = function(container){
 		__box = null,	//盒子
 		__peper = null,	//纸片人
 		__cubes = null;	//所有的六面体
+	var  _papers = ["paper-sprite01","paper-sprite02","paper-sprite03","paper-sprite04","paper-sprite05"];
 	var _boxIsMove = true;	//方盒运动
 	var _controls = null;	//控制器
 	var __stats = null;	//fps
@@ -110,9 +112,8 @@ var main = function(container){
 		})
 	};
 	_this.replay = function(){
-		createjs.Sound.stop();
-		__peper.children.forEach((o)=>{
-			o.visible = false;
+		_papers.forEach(name=>{
+			__peper.remove(__peper.getObjectByName(name));
 		})
 		__cubes.children.forEach((o)=>{
 			o.fadeIn();
@@ -169,13 +170,12 @@ var main = function(container){
 	 * 纸片人出现
 	 */
 	_this.paper = function(){
-		
-		let arr = ["paper-1","paper-2","paper-3","paper-4","paper-5"];
-		let len = arr.length;
+		let len = _papers.length;
 		let unit = 360/len;
 		let radii = 60;
-		arr.forEach((v, k)=>{
+		_papers.forEach((v, k)=>{
 			let s = addPaper(v);
+			s.name = v;
 			let x = radii * Math.cos(THREE.Math.degToRad(k * unit));
 			let z = radii * Math.sin(THREE.Math.degToRad(k * unit));
 			let y = 0;
@@ -184,13 +184,12 @@ var main = function(container){
 		});
 	};
 	function addPaper(id){
-		let img = Preload.getResult(id);
-		let t = new THREE.Texture(img);
-		t.needsUpdate = true;
+		let t = new Texture(CubeShow.Preload.getResult(id));
+		t.setExpire(0.5);
 		let m = new THREE.SpriteMaterial( { map: t, transparent: true } );
 		let sprite = new THREE.Sprite( m );
-		sprite.scale.x = img.width/10;
-		sprite.scale.y = img.height/10;
+		sprite.scale.x = 50;
+		sprite.scale.y = 50;
 		return sprite;
 	}
 	/**
@@ -219,7 +218,6 @@ var main = function(container){
 				o.fadeOut();
 			});
 			var obj = intersects[ 0 ];
-			let s = createjs.Sound.play("BGmusic_" + obj.name, {delay:2000});
 			_this.dispatchEvent({ type: Event.CUBE_CLICK, data:obj});
 		}
 	}
