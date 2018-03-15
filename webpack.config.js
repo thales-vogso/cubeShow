@@ -81,17 +81,6 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(avi|mp4)$/i,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: 'video/[name].[ext]'
-						}
-					}
-				]
-			},
-			{
 				test:/\.(htm|html)$/,
 				use:[{
 					loader:'html-loader',

@@ -1,14 +1,5 @@
 window.AdobeAn = {};
-/*
-const pattern = /\/BGmusic_(.*)\.(mp3|wav)$/;
-let _sounds = {}
-var soundContext = require.context("../sounds/", true, /^\.\/.*\.mp3$/);
-soundContext.keys().map(soundContext).forEach((src) => {
-	let arr = src.match(pattern);
-	_sounds[arr[1]] = src;
-});
-console.log(_sounds);
-*/
+
 /**
  *	主类，继承create.Stage
  *	@param	canvas	主体或者名称
@@ -21,6 +12,7 @@ var Cartoon = function(canvas){
 		HEIGHT = 1042;
 	var _libName = '';
 	var _video = null;
+	var _sound = {};
 	/**
 	 *	游戏初始化
 	 */
@@ -32,39 +24,91 @@ var Cartoon = function(canvas){
 		_video = document.createElement("video");
 		_this.on("tick", onTick);
 	};
+	/**
+	 * 播放
+	 * @param {w} name 
+	 */
 	_this.play = function(name){
 		if(name == "AIRism" || name == "Wireless"){
 			videoPlay(name);
 		}else{
+			if(name != "LC"){
+				soundPlay(name);
+			}
 			if(name != "Jeans") flaPlay(name);
-			let s = createjs.Sound.play("BGmusic_" + name, {delay:2000});
-			//if(_sounds.hasOwnProperty(name)) createjs.Sound.play(_sounds[name], {delay:2000});
 		}	
 	};
+	/**
+	 * 清空
+	 */
 	_this.clear = function(){
 		_this.removeAllChildren();
 		createjs.Sound.stop();
 		if(_video) _video.pause();
 	};
+	/**
+	 * 声音播放
+	 * @param {*} name 
+	 */
+	function soundPlay(name){
+		let myInstance = null;
+		console.log(name);
+		if(_sound.hasOwnProperty(name)){
+			myInstance = createjs.Sound.play(name, {interrupt: createjs.Sound.INTERRUPT_ANY, loop:-1, delay:2000});
+		}else{
+			let url = `./sounds/BGmusic_${name}.mp3`;
+			let listener = createjs.Sound.on("fileload", event=>{
+				createjs.Sound.off("fileload", listener);
+				myInstance = createjs.Sound.play(name, {interrupt: createjs.Sound.INTERRUPT_ANY, loop:-1, delay:2000});
+				_sound[name] = true;
+			});
+			createjs.Sound.registerSound(url, name, 3);
+		}	
+	}
+	/**
+	 * 视频播放
+	 * @param {*} name 
+	 */
 	function videoPlay(name){
-		_video.src = `video/${name}.mp4`;
+		//_video.src = `video/${name}.mp4`;
+		_video.src = `http://appmedia.qq.com/media/641012709/video/${name}.mp4`;
 		_video.setAttribute("loop", "loop");
 		_video.setAttribute("playsinline", "playsinline");
 		_video.setAttribute("webkit-playsinline", "webkit-playsinline");
 		_video.play();
 		var myBuffer = new createjs.VideoBuffer(_video);
-		var myBitmap = new createjs.Bitmap(myBuffer);
+		var mc = new createjs.Bitmap(myBuffer);
 		let scale = 1;
-		if(name == "AIRism")scale = WIDTH/ 1920;
-		else if(name == "Wireless")scale = WIDTH/ 720;
-		myBitmap.scaleX = myBitmap.scaleY = scale;
-		_this.addChild(myBitmap);
+		let regX = 0;
+		let regY = 0;
+		if(name == "AIRism"){
+			scale = WIDTH/ 1920;
+			mc.regX = 960;
+			mc.regY = 540;
+			mc.y = HEIGHT / 2;
+		}else if(name == "Wireless"){
+			scale = 440/604;
+			mc.regX = 302;
+			mc.y = 100;
+		}
+		mc.x = WIDTH /2;
+		mc.scaleX = mc.scaleY = scale;
+		
+		_this.addChild(mc);
 	}
+	/**
+	 * flash canvas播放
+	 * @param {*} name 
+	 */
 	function flaPlay(name){
 		_this.removeAllChildren();
 		import(`../video/${name}`).then(lazy);
 		_libName = name;
 	}
+	/**
+	 * 懒加载
+	 * @param {*} m 
+	 */
 	function lazy(m){
 		var loader = new createjs.LoadQueue(false);
 		let comp = AdobeAn.getComposition(_libName);

@@ -7,6 +7,7 @@ html,body {
 	font-family: "微软雅黑";
 	font-size: 50px;
 	margin: 0;
+	padding: 0;
 }
 
 #ar-loading{
@@ -94,7 +95,7 @@ html,body {
 	width: 100%;
 }
 #ar-create .guide .slogan{
-	width: 50%;
+	width: 100%;
 	margin: 0 auto 5%;
 }
 #ar-create .guide .btn{
@@ -105,7 +106,7 @@ html,body {
 	position: fixed;
 	z-index: inherit;
 	top: 0;
-	right: 0;
+	right: 0.5rem;
 	width: 30%
 }
 #ar-create .back-btn img{

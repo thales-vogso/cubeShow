@@ -1,6 +1,7 @@
 [
 	{
 		"name":"AIRism",
+		"url":"http://zlj.dev.nordri.co/test?1",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -10,6 +11,7 @@
 	},
 	{
 		"name":"DPJ",
+		"url":"http://zlj.dev.nordri.co/test?2",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -19,6 +21,7 @@
 	},
 	{
 		"name":"Dress",
+		"url":"http://zlj.dev.nordri.co/test?3",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -28,6 +31,7 @@
 	},
 	{
 		"name":"DryEX",
+		"url":"http://zlj.dev.nordri.co/test?4",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -37,6 +41,7 @@
 	},
 	{
 		"name":"Jeans",
+		"url":"http://zlj.dev.nordri.co/test?5",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -46,6 +51,7 @@
 	},
 	{
 		"name":"Kando",
+		"url":"http://zlj.dev.nordri.co/test?6",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -55,6 +61,7 @@
 	},
 	{
 		"name":"Kids",
+		"url":"http://zlj.dev.nordri.co/test?7",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -64,6 +71,7 @@
 	},
 	{
 		"name":"UT",
+		"url":"http://zlj.dev.nordri.co/test?8",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},
@@ -73,6 +81,7 @@
 	},
 	{
 		"name":"Wireless",
+		"url":"http://zlj.dev.nordri.co/test?9",
 		"front":{"map":"face"},
 		"back":{"map":"face"},
 		"left":{"map":"side"},

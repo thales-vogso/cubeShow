@@ -28,6 +28,7 @@ var Cube = function(param){
 	_this.init = function(param){
 		THREE.Object3D.call(_this);
 		_this.name = param.name;
+		_this.url = param.url;
 		let g = new THREE.BoxGeometry(WIDTH, WIDTH, WIDTH, SEGMENTS);
 		let m = [
 			getMaterial(param.right),	//right

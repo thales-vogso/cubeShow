@@ -19,7 +19,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.4.4";
+const VER = "1.5.0";
 /**
  *	事件
  */

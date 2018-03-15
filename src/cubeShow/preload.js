@@ -35,8 +35,8 @@ var _queue = null;	//loder
 var init = function(){
 	_queue = new createjs.LoadQueue(false);
 	_queue.loadManifest(_images, false);
-	_queue.loadManifest(_sounds, false);
-	createjs.Sound.registerSounds(_sounds);
+	//_queue.loadManifest(_sounds, false);
+	//createjs.Sound.registerSounds(_sounds);
 };
 /**
  *	加载

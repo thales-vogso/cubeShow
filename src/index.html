@@ -172,6 +172,7 @@ function onCubeClick(e){
 	document.getElementById("ar-create-game").style.display = "";
 	document.getElementById('ar-webgl').style.display = 'none';
 	document.querySelector("#ar-create .guide .slogan img").src = "images/" + name + "-slogan.png";
+	document.querySelector("#ar-create .guide .btn a").href = e.data.url;
 	if(name == "Jeans"){
 		_game.paper();
 		document.getElementById('ar-webgl').style.display = '';
