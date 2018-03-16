@@ -5,7 +5,7 @@ import Texture from "./texture";
  */
 var Cube = function(param){
 	var _this = this;
-	const WIDTH = 10,	//尺寸
+	const WIDTH = 11,	//尺寸
 		SEGMENTS = 1,	//横断面
 		FADE_DURATION = 1000,	//淡入淡出间隔
 		IMG_WIDTH = 512,

@@ -19,7 +19,7 @@ import * as Preload from "./preload";
 /**
  *	版本
  */
-const VER = "1.5.0";
+const VER = "1.6.0";
 /**
  *	事件
  */
@@ -39,6 +39,11 @@ var main = function(container){
 		HEIGHT = 0;
 	const BOX_Y = -10,
 		BOX_Z = -30;
+	const CUBE_RADII = 50,
+		CUBE_RADII_SCOPE = 10,
+		CUBE_RADII_PACK = 15;
+	const PAPER_RADII = 60,
+		PAPER_SCALE = 50;
 		
 	var __camera = null,	//摄像头
 		__scene = null,	//场景
@@ -96,15 +101,15 @@ var main = function(container){
 		arr = arr.concat(tmp,arr,tmp, arr,tmp);
 		let len = arr.length;
 		let unit = 360/len;
-		let radii = 50;
+		let radii = CUBE_RADII;
 		arr.forEach((o, k)=>{
 			if(o) {
 				let mesh = new Cube(o);
 				mesh.addEventListener(Cube.Event.FLY, (e)=>{e.target.play()});
-				let r = (k%3) * 10 + radii;
+				let r = (k%3) * CUBE_RADII_SCOPE + radii;
 				let x = r * Math.cos(THREE.Math.degToRad(k * unit));
 				let z = r * Math.sin(THREE.Math.degToRad(k * unit));
-				let y = (k%2==0)?15:-15;
+				let y = (k%2==0)?CUBE_RADII_PACK:-CUBE_RADII_PACK;
 				mesh.aim(x, y, z);
 				_objects.push(mesh);
 				__cubes.add(mesh);
@@ -137,7 +142,7 @@ var main = function(container){
 			left:{map:null},
 			right:{map:null},
 			top:null,
-			bottom:{color:"white",opacity:0.7}
+			bottom:{color:"white",opacity:0.8}
 		}
 		__box = new Cube(obj);
 		__box.addEventListener(Cube.Event.FADE_IN, onFadeIn);
@@ -172,7 +177,7 @@ var main = function(container){
 	_this.paper = function(){
 		let len = _papers.length;
 		let unit = 360/len;
-		let radii = 60;
+		let radii = PAPER_RADII;
 		_papers.forEach((v, k)=>{
 			let s = addPaper(v);
 			s.name = v;
@@ -188,8 +193,8 @@ var main = function(container){
 		t.setExpire(0.5);
 		let m = new THREE.SpriteMaterial( { map: t, transparent: true } );
 		let sprite = new THREE.Sprite( m );
-		sprite.scale.x = 50;
-		sprite.scale.y = 50;
+		sprite.scale.x = PAPER_SCALE;
+		sprite.scale.y = PAPER_SCALE;
 		return sprite;
 	}
 	/**

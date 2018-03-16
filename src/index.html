@@ -9,8 +9,7 @@
 	<meta name="x5-orientation" content="portrait">
 	<meta name="x5-fullscreen" content="true">
 	<meta name="360-fullscreen" content="true">
-	<title>手Q环境AR效果Demo</title>
-	<script type="text/javascript" src="http://js.aq.qq.com/js/aq_common.js"></script>
+	<title>优衣库</title>
 </head>
 
 <body>
@@ -88,20 +87,79 @@
 			mtt.qb.openQb({
 				url: window.location.href
 			});
+		}		
+		
+		function isInMall(mode, callback){
+			var debug = '0';
+			var result = location.search.match(new RegExp("[\?\&]debug=([^\&]+)", "i"));
+			if (result == null || result.length < 1) {
+				debug = '0';
+			}
+			else{
+				debug = result[1];
+			}            
+			
+			if(debug == '1' || mode == '1'){
+				callback({'code': 1});
+			}
+			
+			mqq.sensor.getLocation(function(retCode, latitude, longitude){
+				if(retCode == 0){
+					url = '//apis.map.qq.com/ws/distance/v1/?';
+					url = url + 'mode=walking&';
+					url = url + 'from=' + latitude + ',' + longitude + '&';
+					url = url + 'to=31.165198,121.397451&'; //优衣库地址：22.54169,113.954513
+					url = url + 'key=UR6BZ-4GC6U-RBEVV-2FH55-33SNJ-KJFEH';
+					
+					$.ajax({
+						type: "GET",
+						url: url,
+						data: {format:'json'},
+						dataType: 'json',
+						//timeout: 5000,
+						json:"callback",
+						success : function(res){		        	
+							if(res.status != 0){
+								callback({'code': -1});
+							}
+							else{
+								var distance = res.result.elements[0].distance;		
+								if(distance<=1000){
+									callback({'code': 1});
+								}
+								else{
+									callback({'code': 0});
+								}
+							}; 				
+						},
+						error:function(){
+							callback({'code': -1});
+						}												
+					})
+				}
+				else{
+					callback({'code': -1});
+				}
+			});
+			
+			
 		}
 	   
 		function goDiscovery() {
-			
-			ARLib.openCamera(cameraFacing, function(ret) {
-				if (ret) {
-					if (isIOS) {
-						//document.body.style.backgroundColor = "white";
-					}
-					if (isAndroid) {
-						document.getElementById('ar-video').style.display = '';
-					}
-				}
-			});
+			//mqq.invoke(isAndroid ? 'sensor' : 'ui', 'notifyRenderReady', {}, function(ret) {
+			//	if (ret) {
+					ARLib.openCamera(cameraFacing, function(ret) {
+						if (ret) {
+							if (isIOS) {
+								//document.body.style.backgroundColor = "white";
+							}
+							if (isAndroid) {
+								document.getElementById('ar-video').style.display = '';
+							}
+						}
+					});
+			//	}
+			//});
 		}
 	</script>
 	<script>
@@ -110,9 +168,17 @@ var _game = null,
 	_cartoon = null;
 var _isLoaded = false,
 	_isEnded = false;
+	
 window.addEventListener('load', function(e){
-	guide();
+	isInMall('1', function(ret){
+		if(ret.code == 1){ //在店内
+			guide();
+		}
+		else{ //在店外，执行活动规则
+		}
+	})
 });
+
 function onProgress(e){
 	document.getElementById("ar-loading").style.display = "";
 	document.querySelector("#ar-loading .percent").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
@@ -178,5 +244,4 @@ function onCubeClick(e){
 }
 	</script>
 </body>
-
 </html>

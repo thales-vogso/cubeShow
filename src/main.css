@@ -58,10 +58,10 @@ html,body {
 	pointer-events:none;
 	top: 0;
 	right: 0;
-	width: 256px;
-	height: 214px;
+	width: 128px;
+	height: 107px;
 	background-image: url("images/page/rotate.png");
-	animation: rotate-animation 5s steps(37) infinite;
+	animation: rotate-animation 1.5s steps(37) infinite;
 }
 #ar-webgl .info img{
 	width: 50%
@@ -143,6 +143,6 @@ html,body {
 		background-position-x: 0;
 	}
 	to {
-		background-position-x: -9472px;
+		background-position-x: -4736px;
 	}
 }
