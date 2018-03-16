@@ -49,31 +49,21 @@ html,body {
 	width: 100%;
 	top:40%;
 	left:0;
+	text-align: center;
 	pointer-events:none;
 }
-#ar-webgl .info .arrow-left{
-	position: absolute;
-	left: 0;
-	top:50%;
-	width: 10%;
-}
-#ar-webgl .info .arrow-right{
-	position: absolute;
+#ar-webgl .rotate{
+	position: fixed;
+	z-index: inherit;
+	pointer-events:none;
+	top: 0;
 	right: 0;
-	top:50%;
-	width: 10%;
-	transform: scale(-1,1);
+	width: 256px;
+	height: 214px;
+	background-image: url("images/page/rotate.png");
+	animation: rotate-animation 5s steps(37) infinite;
 }
-#ar-webgl .info .arrow-left img, #ar-webgl .info .arrow-right img{
-	width: 100%;
-	animation: blink 0.5s ease-in-out infinite alternate;
-}
-#ar-webgl .info .tips{
-	position: absolute;
-	text-align: center;
-	width: 100%;
-}
-#ar-webgl .info .tips img{
+#ar-webgl .info img{
 	width: 50%
 }
 
@@ -106,7 +96,7 @@ html,body {
 	position: fixed;
 	z-index: inherit;
 	top: 0;
-	right: 0.5rem;
+	left: 0.5rem;
 	width: 30%
 }
 #ar-create .back-btn img{
@@ -146,5 +136,13 @@ html,body {
 	}
 	to {
 		background-position-x: -2640px;
+	}
+}
+@keyframes rotate-animation{
+	from {
+		background-position-x: 0;
+	}
+	to {
+		background-position-x: -9472px;
 	}
 }

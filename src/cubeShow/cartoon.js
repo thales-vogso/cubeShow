@@ -59,7 +59,7 @@ var Cartoon = function(canvas){
 			let url = `./sounds/BGmusic_${name}.mp3`;
 			let listener = createjs.Sound.on("fileload", event=>{
 				createjs.Sound.off("fileload", listener);
-				myInstance = createjs.Sound.play(name, {interrupt: createjs.Sound.INTERRUPT_ANY, loop:-1, delay:2000});
+				myInstance = createjs.Sound.play(name, {interrupt: createjs.Sound.INTERRUPT_ANY, loop:-1, delay:1000});
 				_sound[name] = true;
 			});
 			createjs.Sound.registerSound(url, name, 3);
