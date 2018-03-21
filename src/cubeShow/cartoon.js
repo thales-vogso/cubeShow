@@ -21,20 +21,29 @@ var Cartoon = function(canvas){
 		createjs.Ticker.setFPS = FPS;	//帧频
 		createjs.Ticker.addEventListener('tick', _this);	//按照帧频更新舞台
 		createjs.Touch.enable(_this);	//启用tauch
-		_video = document.createElement("video");
+		videoInit();
 		_this.on("tick", onTick);
 	};
+	function videoInit(){
+		_video = document.createElement("video");
+		_video.addEventListener("loadstart", videoProgress);
+		//_video.addEventListener("progress", videoProgress);
+		_video.addEventListener("waiting", videoProgress);
+		_video.addEventListener("canplay", videoComplete);
+		_video.addEventListener("canplaythrough", videoComplete);
+		_video.addEventListener("play", videoComplete);
+		_video.addEventListener("playing", videoComplete);
+	}
 	/**
 	 * 播放
 	 * @param {w} name 
 	 */
 	_this.play = function(name){
+		createjs.Sound.stop();
 		if(name == "AIRism" || name == "Wireless"){
 			videoPlay(name);
 		}else{
-			if(name != "LC"){
-				soundPlay(name);
-			}
+			soundPlay(name);
 			if(name != "Jeans") flaPlay(name);
 		}	
 	};
@@ -44,6 +53,7 @@ var Cartoon = function(canvas){
 	_this.clear = function(){
 		_this.removeAllChildren();
 		createjs.Sound.stop();
+		soundPlay("LC");
 		if(_video) _video.pause();
 	};
 	/**
@@ -52,7 +62,6 @@ var Cartoon = function(canvas){
 	 */
 	function soundPlay(name){
 		let myInstance = null;
-		console.log(name);
 		if(_sound.hasOwnProperty(name)){
 			myInstance = createjs.Sound.play(name, {interrupt: createjs.Sound.INTERRUPT_ANY, loop:-1, delay:2000});
 		}else{
@@ -118,17 +127,27 @@ var Cartoon = function(canvas){
 		loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
 		loader.loadManifest(lib.properties.manifest);
 	}
+	function videoProgress(e){
+		var event = new createjs.Event(Cartoon.Event.IMG_LOADING);
+		console.log(e);
+		event.loaded = 0.5;
+		_this.dispatchEvent(event);
+	}
+	function videoComplete(e){
+		console.log(e);
+		_this.dispatchEvent(Cartoon.Event.IMG_LOADED);
+	}
 	function handleProgress(evt){
 		var event = new createjs.Event(Cartoon.Event.IMG_LOADING);
 		event.loaded = evt.loaded;
 		_this.dispatchEvent(event);
 	}
 	function handleFileLoad(evt, comp) {
-		_this.dispatchEvent(Cartoon.Event.IMG_LOADED);
 		var images=comp.getImages();	
 		if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
 	}
 	function handleComplete(evt,comp) {
+		_this.dispatchEvent(Cartoon.Event.IMG_LOADED);
 		//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
 		var lib=comp.getLibrary();
 		var ss=comp.getSpriteSheet();
