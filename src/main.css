@@ -101,7 +101,7 @@ html,body {
 #ar-create .back-btn{
 	position: fixed;
 	z-index: inherit;
-	top: 0;
+	top: 1.5rem;
 	left: 0.5rem;
 	width: 30%
 }

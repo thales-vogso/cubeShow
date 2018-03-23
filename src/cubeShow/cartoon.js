@@ -161,6 +161,7 @@ var Cartoon = function(canvas){
 			if(mc.currentFrame >= mc.totalFrames){
 				mc.off("tick", listener);
 				_this.dispatchEvent(Cartoon.Event.MC_END);
+				_this.removeAllChildren();
 			}
 		});
 		_this.addChild(mc);	
