@@ -65,7 +65,7 @@ html,body {
 	position: fixed;
 	z-index: inherit;
 	pointer-events:none;
-	top: 1rem;
+	top: 0.7rem;
 	right: 0;
 	width: 128px;
 	height: 107px;

@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"UT_atlas_", frames: [[1354,719,640,715],[642,1438,640,697],[0,1601,640,696],[0,2299,640,693],[642,2835,270,216],[231,2994,183,146],[0,2994,229,191],[1354,1436,640,712],[914,2835,270,216],[712,0,640,720],[712,722,640,714],[0,891,640,708],[1284,2150,639,680],[642,2137,640,696],[1284,2832,628,640],[1354,0,640,717],[0,0,710,889]]}
+		{name:"UT_atlas_", frames: [[1354,719,640,715],[642,1438,640,697],[0,1601,640,696],[0,2299,640,693],[914,2835,270,216],[231,2994,183,146],[0,2994,229,191],[1354,1436,640,712],[642,2835,270,216],[712,0,640,720],[712,722,640,714],[0,891,640,708],[1284,2150,639,680],[642,2137,640,696],[1284,2832,628,640],[1354,0,640,717],[0,0,710,889]]}
 ];
 
 
@@ -1274,12 +1274,12 @@ p.nominalBounds = new cjs.Rectangle(352.3,643.8,13.4,16.8);
 	// 图层_1
 	this.instance = new lib._1111111("synched",0);
 	this.instance.parent = this;
-	this.instance.setTransform(55.4,74.5,0.798,0.798,0,0,0,24.8,224.6);
+	this.instance.setTransform(55.4,170.5,0.798,0.798,0,0,0,24.8,224.6);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(160));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(636.6,929.8,10.7,13.4);
+p.nominalBounds = new cjs.Rectangle(636.6,1025.8,10.7,13.4);
 // library properties:
 lib.properties = {
 	id: 'UT',
@@ -1289,7 +1289,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/images-UT_atlas_.png", id:"UT_atlas_"}
+		{src:"images/images-UT_atlas_.png?1521813135110", id:"UT_atlas_"}
 	],
 	preloads: []
 };
