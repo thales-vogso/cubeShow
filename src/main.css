@@ -65,7 +65,7 @@ html,body {
 	position: fixed;
 	z-index: inherit;
 	pointer-events:none;
-	top: 0;
+	top: 1rem;
 	right: 0;
 	width: 128px;
 	height: 107px;
@@ -101,8 +101,8 @@ html,body {
 #ar-create .back-btn{
 	position: fixed;
 	z-index: inherit;
-	top: 1.5rem;
-	left: 0.5rem;
+	top: 1rem;
+	right: 0.5rem;
 	width: 30%
 }
 #ar-create .back-btn img{
