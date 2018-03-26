@@ -1,5 +1,6 @@
 import './main.css';
-import * as CubeShow from "./cubeShow/main";
+import * as foo from "./cubeShow/main";
 
 
-window.CubeShow = CubeShow;
+CubeShow = foo;
+

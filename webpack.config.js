@@ -28,6 +28,7 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin()
 	],
 	module:{
+		
 		rules:[
 			{
 				test:/\.css$/i,
@@ -89,18 +90,20 @@ module.exports = {
 					}
 				}]
 			}
-		],
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader',
-			query:{
-				presets: ['es2015'],
-				plugins: ['transform-runtime']
-			} 
-		}]
+			
+			,{
+				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['es2015']
+					}
+				}
+			}
+			
+		]
 	},
-
 	output: {
 		filename: './js/[name].bundle.js',
 		chunkFilename: './js/[name].bundle.js',
