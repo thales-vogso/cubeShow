@@ -42,7 +42,6 @@ module.exports = {
 							regExp: /(\w+)[\/|\\](\w+)\.(png|jpg|gif)/i,
 							//name: 'images/[1]-[name].[ext]'
 							name(file){
-								console.log(file);
 								return 'images/[1]-[name].[ext]';
 							}
 						}
@@ -90,8 +89,18 @@ module.exports = {
 					}
 				}]
 			}
-		]
+		],
+		loaders: [{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			loader: 'babel-loader',
+			query:{
+				presets: ['es2015'],
+				plugins: ['transform-runtime']
+			} 
+		}]
 	},
+
 	output: {
 		filename: './js/[name].bundle.js',
 		chunkFilename: './js/[name].bundle.js',

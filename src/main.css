@@ -47,15 +47,15 @@ html,body {
 	position: absolute;
 	z-index:inherit;
 	width: 100%;
-	top:40%;
+	bottom:1%;
 	left:0;
 	pointer-events:none;
 }
 #ar-webgl .info .tips{
-	margin: -55px 0 0 -220px;
-	width: 440px;
-	height: 110px;
-	transform: scale(0.75);
+	margin: -64px 0 0 -255px;
+	width: 510px;
+	height: 128px;
+	transform: scale(0.60);
 	position: relative;
 	left: 50%;
 	background-image: url("images/page/tips.png");
@@ -91,7 +91,7 @@ html,body {
 	width: 100%;
 }
 #ar-create .guide .slogan{
-	width: 100%;
+	width: 80%;
 	margin: 0 auto 5%;
 }
 #ar-create .guide .btn{
@@ -149,7 +149,7 @@ html,body {
 		background-position-x: 0;
 	}
 	to {
-		background-position-x: -3960px;
+		background-position-x: -4590px;
 	}
 }
 @keyframes rotate-animation{

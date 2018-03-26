@@ -103,6 +103,7 @@
 			
 			if(debug == '1' || mode == '1'){
 				callback({'code': 1});
+				guide();
 			}
 			
 			mqq.sensor.getLocation(function(retCode, latitude, longitude){
@@ -112,7 +113,7 @@
 					url = url + 'from=' + latitude + ',' + longitude + '&';
 					url = url + 'to=31.165198,121.397451&'; //优衣库地址：22.54169,113.954513
 					url = url + 'key=UR6BZ-4GC6U-RBEVV-2FH55-33SNJ-KJFEH';
-					
+					console.log(1);
 					$.ajax({
 						type: "GET",
 						url: url,
@@ -128,6 +129,7 @@
 								var distance = res.result.elements[0].distance;		
 								if(distance<=1000){
 									callback({'code': 1});
+									guide();
 								}
 								else{
 									callback({'code': 0});
@@ -170,11 +172,11 @@ var _game = null,
 	_cartoon = null;
 var _isLoaded = false,
 	_isEnded = false;
-	
+
 window.addEventListener('load', function(e){
 	isInMall('1', function(ret){
 		if(ret.code == 1){ //在店内
-			guide();
+			
 		}
 		else{ //在店外，执行活动规则
 		}
@@ -228,22 +230,25 @@ function guide(){
 function onback(){
 	document.getElementById("ar-create").style.display = "none";
 	document.getElementById('ar-webgl').style.display = '';
+	document.querySelector('#ar-webgl .info').style.display = '';
 	_cartoon.clear();
 	_game.replay()
 }
 function onCubeClick(e){
-	let name = e.data.name;
+	var name = e.data.name;
 	document.getElementById("ar-create").style.display = "";
 	document.getElementById("ar-create-game").style.display = "";
 	document.getElementById('ar-webgl').style.display = 'none';
 	document.querySelector('#ar-webgl .info').style.display = '';
 	document.querySelector("#ar-create .guide .slogan img").src = "images/" + name + "-slogan.png";
 	document.querySelector("#ar-create .guide .btn a").href = e.data.url;
+	document.querySelector("#ar-create .back-btn").style = ""
 	if(name == "Jeans"){
 		_game.paper();
 		document.getElementById('ar-webgl').style.display = '';
 		document.querySelector('#ar-webgl .info').style.display = 'none';
 		document.getElementById("ar-create-game").style.display = "none";
+		document.querySelector("#ar-create .back-btn").style.left = "0.5rem";
 	}
 	_cartoon.play(name);
 }
