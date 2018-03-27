@@ -1,7 +1,7 @@
 window.AdobeAn = {};
 
-require('../video/LC');
-require('../video/images/LC_atlas_.png');
+//require('../video/LC');
+//require('../video/images/LC_atlas_.png');
 /**
  *	主类，继承create.Stage
  *	@param	canvas	主体或者名称
@@ -112,10 +112,14 @@ var Cartoon = function(canvas){
 	 * @param {*} name 
 	 */
 	function flaPlay(name){
-		_this.removeAllChildren();
-		//import(`../video/${name}`).then(lazy);
 		_libName = name;
-		lazy();
+		_this.removeAllChildren();
+		if(module.hot){
+			import(`../video/${name}`).then(lazy);
+			//require.ensure([`../video/${name}`], e=>{console.log(e);});
+		}
+		
+		//lazy();
 	}
 	/**
 	 * 懒加载

@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	entry: {
@@ -20,7 +20,19 @@ module.exports = {
 			minify:{html5:true},
 			title:'cubeshow'
 		}),
-		new UglifyJSPlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			output: {
+				comments: false
+			},
+			compress: {
+				warnings: false
+			}
+		}),
+		new ExtractTextPlugin({
+			filename:'[name].css',
+			publicPath:'/m/',
+			allChunks: true
+		}),
 		new webpack.ProvidePlugin({
 			THREE:"three",
 			createjs:"latest-createjs"
@@ -32,7 +44,10 @@ module.exports = {
 		rules:[
 			{
 				test:/\.css$/i,
-				use:['style-loader','css-loader']
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: "css-loader"
+				})
 			},
 			{
 				test: /\.(png|jpe?g|gif)$/i,
@@ -97,7 +112,12 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['es2015']
+						presets: ['es2015'],
+						plugins: [
+							"syntax-dynamic-import",
+							"transform-object-rest-spread",
+							"transform-class-properties"
+						]
 					}
 				}
 			}

@@ -114,15 +114,24 @@ var Cube = function(param){
 		tween.start();
 	};
 	function onFlying(e){
+		/*
 		let x = cuBazier(e.t, _p0.x, _p1.x, _p2.x, _p3.x);
 		let y = cuBazier(e.t, _p0.y, _p1.y, _p2.y, _p3.y);
 		let z = cuBazier(e.t, _p0.z, _p1.z, _p2.x, _p3.z);
+		*/
+		let x = sqBazier(e.t, _p0.x, _p1.x, _p3.x);
+		let y = sqBazier(e.t, _p0.y, _p1.y, _p3.y);
+		let z = sqBazier(e.t, _p0.z, _p1.z, _p3.z);
 		let scale = SCALE_MIN + e.t * (SCALE_MAX - SCALE_MIN);
 		_this.scale.set(scale,scale,scale);
 		_this.position.set(x,y,z);
 	}
 	function cuBazier(t, p0, p1, p2, p3){
 		let b = Math.pow((1-t), 3) * p0 + Math.pow((1-t), 2) * t * p1 * 3 + Math.pow(t, 2) * (1-t) * p2 * 3  + Math.pow(t, 3) * p3;
+		return b;
+	}
+	function sqBazier(t, p0, p1, p2){
+		let b = Math.pow((1-t), 2) * p0 + (1-t) * t * p1 * 2 + Math.pow(t, 2) * p2;
 		return b;
 	}
 	function onFly(e){
