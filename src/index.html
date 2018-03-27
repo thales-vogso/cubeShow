@@ -32,7 +32,6 @@
 		<canvas id="ar-create-game" width="640" height="1387" style="width:100%;height:100%"></canvas>
 		<div class="guide">
 			<div class="slogan"><img src="./images/page/tips.png"/></div>
-			<div class="btn"><a href="#"><img src="./images/page/btn.png"/></a></div>
 		</div>
 		<div class="back-btn" style="display:none" ><img src="./images/page/back.png"/></div>
 	</div>
@@ -191,9 +190,26 @@ function onComplete(e){
 	document.getElementById("ar-loading").style.display = "none";
 }
 function onMcEnd(e){
-	_isEnded = true;
-	goDiscovery();
-	box();
+	var name = e.data;
+	if(name == "LC"){
+		_isEnded = true;
+		goDiscovery();
+		box();
+	}else{
+		var nameToID = {
+			"AIRism":1,
+			"DPJ":2,
+			"Dress":3,
+			"DryEX":4,
+			"Jeans":5,
+			"Kando":6,
+			"Kids":7,
+			"UT":8,
+			"Wireless":9,
+		}
+		var id = nameToID[name];
+		location.href = "https://act-digitalfsstore18001.uniqlo.cn/web/index.html?(" + id + ")?1";
+	}
 }
 function onCubeProgress(e){
 	if(_isEnded) onProgress(e);
@@ -241,7 +257,6 @@ function onCubeClick(e){
 	document.getElementById('ar-webgl').style.display = 'none';
 	document.querySelector('#ar-webgl .info').style.display = '';
 	document.querySelector("#ar-create .guide .slogan img").src = "images/" + name + "-slogan.png";
-	document.querySelector("#ar-create .guide .btn a").href = e.data.url;
 	document.querySelector("#ar-create .back-btn").style = ""
 	if(name == "Jeans"){
 		_game.paper();

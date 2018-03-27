@@ -29,8 +29,7 @@ module.exports = {
 			}
 		}),
 		new ExtractTextPlugin({
-			filename:'[name].css',
-			publicPath:'/m/',
+			filename:'css/[name].css',
 			allChunks: true
 		}),
 		new webpack.ProvidePlugin({
@@ -46,7 +45,8 @@ module.exports = {
 				test:/\.css$/i,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
-					use: "css-loader"
+					use: "css-loader",
+					publicPath:'../',
 				})
 			},
 			{

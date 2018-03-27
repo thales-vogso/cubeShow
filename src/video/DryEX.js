@@ -1604,7 +1604,7 @@ p.nominalBounds = new cjs.Rectangle(-488.9,18.8,952.3,673.7);
 
 // stage content:
 (lib.DryEX = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+	if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	// 图层_15
 	this.instance = new lib.元件14_1("synched",0);

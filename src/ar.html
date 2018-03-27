@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-itunes-app" content="app-id=444934666">
+	<meta name="format-detection" content="telephone=no">
+	<meta itemprop="name" content=""><!--分享卡标题预埋meta-->
+	<meta name="description" itemprop="description" content="" /><!--分享卡描述预埋meta-->
+	<meta itemprop="image" content="" /><!--分享卡图片URL预埋meta-->
+	<meta http-equiv="x-dns-prefetch-control" content="on" /><!--是否开启域名DNS预加载-->
+	<link rel="dns-prefetch" href="" /><!--需要预加载的域名-->
+	<title>优衣库</title>
+	<script type="text/javascript">
+	(function (win,doc){
+		if (!win.addEventListener) return;
+		var html=document.documentElement;
+		function setFont()
+		{
+			var cliWidth=html.clientWidth;
+			html.style.fontSize=100*(cliWidth/750)+'px';
+		}
+		win.addEventListener('resize',setFont,false)
+		setFont()
+	})(window,document);
+	/*H5页面在PC端打开后跳转至对应PC页面url的处理函数*/
+	var OS=function(){var a=navigator.userAgent,b=/(?:Android)/.test(a),d=/(?:Firefox)/.test(a),e=/(?:Mobile)/.test(a),f=b&&e,g=b&&!f,c=/(?:iPad.*OS)/.test(a),h=!c&&/(?:iPhone\sOS)/.test(a),k=c||g||/(?:PlayBook)/.test(a)||d&&/(?:Tablet)/.test(a),a=!k&&(b||h||/(?:(webOS|hpwOS)[\s\/]|BlackBerry.*Version\/|BB10.*Version\/|CriOS\/)/.test(a)||d&&e);return{android:b,androidPad:g,androidPhone:f,ipad:c,iphone:h,tablet:k,phone:a}}();
+
+	</script>
+  <style type="text/css">
+    /*commonArea,手Q中H5页面通用css基础样式区域*/
+    html,body, div, p, ol, ul, li, table, tbody, tr, td, textarea,
+      form, input, h1, h2, h3, h4, h5, dl, dt, dd, img, iframe, header, nav,
+      section, article, footer, figure, figcaption, menu, a, p,button {padding: 0;margin: 0; -webkit-user-select: none; -moz-user-select: none; -webkit-text-size-adjust: none; color: #fff;}
+      html ,body{ width: 100%; height: 100%;}
+      body { font-size: 62.5%; font: 16px STHeiTi, sans-serif; min-width: 320px; margin: 0 auto;}
+      em{ font-style: normal;}
+      a, span { text-decoration: none;display: inline-block;}
+      a:link, a:visited{ color: #fff; text-decoration:none;}
+      a,button{outline: none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+      button{border:none; background: transparent;}
+      li {list-style: none;}
+			body{
+				background: transparent;
+				text-align: center;
+				position: relative;
+			}
+			.content-wrap{
+				position: absolute;
+				width:100%;
+				left:0rem;
+				bottom:0.4rem;
+				padding:0 0.4rem;
+			}
+			.content{
+				height:0.8rem;
+				width:5.9rem;
+				background:rgba(255,255,255,0.9);
+				border-radius:0.12rem;
+				padding:0.4rem;
+				display:none;
+				animation: TopSlideIn .4s ease-in-out 0s forwards;
+				-webkit-animation: TopSlideIn .4s ease-in-out 0s forwards;
+			}
+			.leftword{
+				float:left;
+				text-align: left;
+			}
+			.word{
+				color:black;
+				font-size:0.4rem;
+				font-weight:bold;
+				line-height: 0.42rem;
+			}
+			.wordsmall{
+				font-size:0.28rem;
+				line-height:0.3rem;
+				color:#777;
+				margin-top:0.12rem;
+			}
+			.button{
+				display:inline-block;
+				font-size:0.36rem;
+				line-height: 0.36rem;
+				color:#12b7f5;
+				font-weight:bold;
+				margin-top:0.22rem;
+			}
+			#btnContent:active{
+				background-color: rgba(255,255,255,0.8);
+			}
+			@-webkit-keyframes TopSlideIn {
+				0% {
+				   opacity: 0;
+				   -webkit-transform: translate3d(0,1rem,0);
+				   transform: translate3d(0,1rem,0);
+				}
+				100% {
+			    opacity: 1;
+			    -webkit-transform: translateZ(0);
+			    transform: translateZ(0);
+				}
+			}
+			@keyframes TopSlideIn {
+				0% {
+				   opacity: 0;
+				   -webkit-transform: translate3d(0,1rem,0);
+				   transform: translate3d(0,1rem,0);
+				}
+				100% {
+			    opacity: 1;
+			    -webkit-transform: translateZ(0);
+			    transform: translateZ(0);
+				}
+			}
+  </style>
+</head>
+<script src="http://sqimg.qq.com/qq_product_operations/jslib/zepto.min.js?_bid=2439"></script><!--zepto-->
+<script src="http://open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
+<body>
+
+	<div class="content-wrap">
+		<div class="content" id="btnContent">
+			<div class="leftword">
+				<p class="word">请使用新版本参与活动</p>
+				<p class="wordsmall" style="margin-top:0.12rem;">升级到最新版手机QQ可参与活动。</p>
+			</div>
+			<div class="button" >立即升级</div>
+		</div>
+	</div>
+
+	<div id="ar-loading">
+		<div class="loadingbar"></div>
+		<div class="percent">加载中...</div>
+	</div>
+	<div id="ar-video" style="display:none">
+		<video id="video" class="video" autoplay=""></video>
+		<canvas id="canvas" style="position:absolute;left:0px;top:0px;"></canvas>
+	</div>
+	<div id="ar-webgl" style="display:none">
+		<canvas id="ar-webgl-game"></canvas>
+		<div class="info">
+			<div class="tips"></div>
+		</div>
+		<div class="rotate"></div>
+	</div>
+	<div id="ar-create" style="display:none">
+		<canvas id="ar-create-game" width="640" height="1387" style="width:100%;height:100%"></canvas>
+		<div class="guide">
+			<div class="slogan"><img src="./images/page-tips.png"/></div>
+		</div>
+		<div class="back-btn" style="display:none" ><img src="./images/page-back.png"/></div>
+	</div>
+<script>
+if ( mqq.compare('7.2.5') < 0){
+	//低版本入口未合并，增加下边距
+	$(".content-wrap").attr("style","bottom:2.2rem;")
+}
+
+
+mqq.debug.detailLog({
+	id: "im",
+	subid: "mqq_transwebview",
+	content: "WebViewTime - start",
+	level: "info"
+});
+var ua = navigator.userAgent;
+var isAndroid = /android|adr/gi.test(ua);
+mqq.invoke( isAndroid?'sensor':'ui','notifyRenderReady',{},function(ret){	
+	if(ret){
+		//$(".content").show();//这里添加互动部分的代码***	
+		$.ajax({
+			type: "GET",
+			url:"./js/app.bundle.js",
+			dataType: "script",
+			success:function(){
+				guide();
+			}
+		});
+	}
+})
+
+var ENV = (function () {
+
+	var ua = navigator.userAgent.toLowerCase();
+	var ua2 = navigator.userAgent;
+
+	var platform = function (os) {
+		var ver = ('' + (new RegExp(os + '(\\d+((\\.|_)\\d+)*)').exec(ua) || [, 0])[1]).replace(/_/g, '.');
+		//// undefined < 3 === false, but null < 3 === true
+		return !!parseFloat(ver);
+	};
+
+	return {
+		is_mqq: /(iPad|iPhone|iPod).*? (IPad)?QQ\/([\d\.]+)/.test(ua2) ||
+			/\bV1_AND_SQI?_([\d\.]+)(.*? QQ\/([\d\.]+))?/.test(ua2),
+		is_ios: platform('os '),
+		is_android: platform('android[/ ]'),
+		is_pc: !platform('os ') && !platform('android[/ ]')
+	}
+})();
+
+var jump_url
+if (ENV.is_ios) {
+	jump_url = 'itms-apps://itunes.apple.com/cn/app/qq-2011/id444934666?mt=8';
+} else {
+	jump_url = 'http://im.qq.com/mobileqq/';
+}
+
+
+  //绑定关闭按钮
+  $("#btnContent").on("touchend",function(){
+		window.location.href=jump_url;
+		tcssReport("arCard.adapt.update");
+  });
+	// 隐藏分享按钮
+	mqq.ui.setTitleButtons({
+		right: {hidden: true}
+	})
+
+	//ios调用js api即可
+	mqq.invoke('ui', 'disableLongPress', {
+	  enable: true
+	});
+	//android需禁用鼠标右键事件
+	document.oncontextmenu=function(){
+	  window.event.returnValue=false;
+	}
+	mqq.invoke('ui', 'webviewCanScroll', {"enable": false});
+
+</script>
+<script>
+	var CubeShow = null;
+	var _game = null,
+		_cartoon = null;
+	var _isLoaded = false,
+		_isEnded = false;
+		
+	function onProgress(e){
+		document.getElementById("ar-loading").style.display = "";
+		document.querySelector("#ar-loading .percent").innerHTML = Math.floor(e.loaded * 10000)/100 + "%";
+	}
+	function onComplete(e){
+		document.getElementById("ar-loading").style.display = "none";
+	}
+	function onMcEnd(e){
+		var name = e.data;
+		if(name == "LC"){
+			_isEnded = true;
+			goDiscovery();
+			box();
+		}else{
+			var nameToID = {
+				"AIRism":1,
+				"DPJ":2,
+				"Dress":3,
+				"DryEX":4,
+				"Jeans":5,
+				"Kando":6,
+				"Kids":7,
+				"UT":8,
+				"Wireless":9,
+			}
+			var id = nameToID[name];
+			location.href = "https://act-digitalfsstore18001.uniqlo.cn/web/index.html?(" + id + ")?1";
+		}
+	}
+	function onCubeProgress(e){
+		if(_isEnded) onProgress(e);
+	}
+	function onCubeComplete(e){
+		_isLoaded = true;
+		box();
+	}
+	function box(){
+		if(_isLoaded && _isEnded){
+			document.getElementById("ar-loading").style.display = "none";
+			_game = new CubeShow.main(document.getElementById("ar-webgl-game"));
+			_game.addEventListener(CubeShow.Event.CUBE_CLICK, onCubeClick);
+			document.querySelector('#ar-create .back-btn').addEventListener("click", onback);
+			document.getElementById("ar-create").style.display = "none";
+			document.getElementById('ar-webgl').style.display = '';
+			document.querySelector('#ar-create .back-btn').style.display = '';
+			document.querySelector('#ar-create .guide').style.display = '';
+			_game.launch();
+		}
+	}
+	function guide(){
+		document.getElementById("ar-create").style.display = "";
+		document.querySelector('#ar-create .back-btn').style.display = 'none';
+		document.querySelector('#ar-create .guide').style.display = 'none';
+		document.getElementById('ar-webgl').style.display = 'none';
+		_cartoon = new CubeShow.Cartoon(document.getElementById("ar-create-game"));
+		_cartoon.on(CubeShow.Cartoon.Event.IMG_LOADING, onProgress);
+		_cartoon.on(CubeShow.Cartoon.Event.IMG_LOADED, onComplete);
+		_cartoon.on(CubeShow.Cartoon.Event.MC_END, onMcEnd);
+		_cartoon.play("LC");
+		CubeShow.Preload.load(onCubeProgress, onCubeComplete);
+	}
+	function onback(){
+		document.getElementById("ar-create").style.display = "none";
+		document.getElementById('ar-webgl').style.display = '';
+		document.querySelector('#ar-webgl .info').style.display = '';
+		_cartoon.clear();
+		_game.replay()
+	}
+	function onCubeClick(e){
+		var name = e.data.name;
+		document.getElementById("ar-create").style.display = "";
+		document.getElementById("ar-create-game").style.display = "";
+		document.getElementById('ar-webgl').style.display = 'none';
+		document.querySelector('#ar-webgl .info').style.display = '';
+		document.querySelector("#ar-create .guide .slogan img").src = "images/" + name + "-slogan.png";
+		document.querySelector("#ar-create .back-btn").style = ""
+		if(name == "Jeans"){
+			_game.paper();
+			document.getElementById('ar-webgl').style.display = '';
+			document.querySelector('#ar-webgl .info').style.display = 'none';
+			document.getElementById("ar-create-game").style.display = "none";
+			document.querySelector("#ar-create .back-btn").style.left = "0.5rem";
+		}
+		_cartoon.play(name);
+	}
+</script>
+
+</body>
+</body>
+</html>

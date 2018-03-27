@@ -2311,7 +2311,7 @@ p.nominalBounds = new cjs.Rectangle(334.4,585.4,63,68.3);
 
 // stage content:
 (lib.DPJ = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+	if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	// 图层_1
 	this.instance = new lib.qq("synched",0);

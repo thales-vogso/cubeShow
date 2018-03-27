@@ -835,7 +835,7 @@ p.nominalBounds = new cjs.Rectangle(0,0,516.6,671.8);
 
 // stage content:
 (lib.Kando = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+	if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	// 3
 	this.instance = new lib.元件3_1("synched",0);

@@ -11,10 +11,11 @@ var Cartoon = function(canvas){
 	
 	var FPS = 24;	//帧频
 	var WIDTH = 640,
-		HEIGHT = 1042;
+		HEIGHT = 1387;
 	var _libName = '';
 	var _video = null;
 	var _sound = {};
+	var _expire = null;
 	/**
 	 *	游戏初始化
 	 */
@@ -35,6 +36,7 @@ var Cartoon = function(canvas){
 		_video.addEventListener("canplaythrough", videoComplete);
 		_video.addEventListener("play", videoComplete);
 		_video.addEventListener("playing", videoComplete);
+		_video.addEventListener("ended", videoEnded)
 	}
 	/**
 	 * 播放
@@ -46,7 +48,11 @@ var Cartoon = function(canvas){
 			videoPlay(name);
 		}else{
 			soundPlay(name);
-			if(name != "Jeans") flaPlay(name);
+			if(name == "Jeans"){
+				_expire = new Date().getTime() + 5 * 1000;
+			}else{
+				flaPlay(name);
+			}
 		}	
 	};
 	/**
@@ -54,6 +60,7 @@ var Cartoon = function(canvas){
 	 */
 	_this.clear = function(){
 		_this.removeAllChildren();
+		_expire = null;
 		createjs.Sound.stop();
 		soundPlay("LC");
 		if(_video) _video.pause();
@@ -82,8 +89,9 @@ var Cartoon = function(canvas){
 	 */
 	function videoPlay(name){
 		//_video.src = `video/${name}.mp4`;
+		_libName = name;
 		_video.src = `http://appmedia.qq.com/media/641012709/video/${name}.mp4`;
-		_video.setAttribute("loop", "loop");
+		//_video.setAttribute("loop", "loop");
 		_video.setAttribute("playsinline", "playsinline");
 		_video.setAttribute("webkit-playsinline", "webkit-playsinline");
 		_video.play();
@@ -96,12 +104,13 @@ var Cartoon = function(canvas){
 			scale = WIDTH/ 1920;
 			mc.regX = 960;
 			mc.regY = 540;
-			mc.y = HEIGHT / 2;
+			
 		}else if(name == "Wireless"){
 			scale = 440/604;
 			mc.regX = 302;
-			mc.y = 100;
+			mc.regY = 540;
 		}
+		mc.y = window.innerHeight / 2 * _this.canvas.width /_this.canvas.clientWidth;
 		mc.x = WIDTH /2;
 		mc.scaleX = mc.scaleY = scale;
 		
@@ -136,13 +145,17 @@ var Cartoon = function(canvas){
 	}
 	function videoProgress(e){
 		var event = new createjs.Event(Cartoon.Event.IMG_LOADING);
-		console.log(e);
 		event.loaded = 0.5;
 		_this.dispatchEvent(event);
 	}
 	function videoComplete(e){
-		console.log(e);
 		_this.dispatchEvent(Cartoon.Event.IMG_LOADED);
+	}
+	function videoEnded(e){
+		console.log(e);
+		var event = new createjs.Event(Cartoon.Event.MC_END);
+		event.data = _libName;
+		_this.dispatchEvent(event);
 	}
 	function handleProgress(evt){
 		var event = new createjs.Event(Cartoon.Event.IMG_LOADING);
@@ -167,14 +180,21 @@ var Cartoon = function(canvas){
 		let listener = mc.on("tick", e=>{
 			if(mc.currentFrame >= mc.totalFrames){
 				mc.off("tick", listener);
-				_this.dispatchEvent(Cartoon.Event.MC_END);
+				var event = new createjs.Event(Cartoon.Event.MC_END);
+				event.data = _libName;
+				_this.dispatchEvent(event);
 				_this.removeAllChildren();
 			}
 		});
 		_this.addChild(mc);	
 	}	
 	function onTick (e) {
-		
+		if(_expire && new Date().getTime() > _expire){
+			_expire = null;
+			var event = new createjs.Event(Cartoon.Event.MC_END);
+			event.data = "Jeans";
+			_this.dispatchEvent(event);
+		}
 	}
 	this.init(canvas);
 };

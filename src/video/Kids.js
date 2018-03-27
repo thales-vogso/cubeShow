@@ -720,7 +720,7 @@ p.nominalBounds = new cjs.Rectangle(115.4,142.9,554.3,612.4);
 
 // stage content:
 (lib.Kids = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+	if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	// 图层_1
 	this.instance = new lib._11111111("synched",0);
