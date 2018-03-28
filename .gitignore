@@ -10,3 +10,4 @@ npm-debug.log
 /dist/
 /psd/
 package-lock.json
+*.zip

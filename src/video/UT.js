@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"UT_atlas_", frames: [[1354,719,640,715],[642,1438,640,697],[0,1601,640,696],[0,2299,640,693],[642,2835,270,216],[231,2994,183,146],[0,2994,229,191],[1354,1436,640,712],[914,2835,270,216],[712,0,640,720],[712,722,640,714],[0,891,640,708],[1284,2150,639,680],[642,2137,640,696],[1284,2832,628,640],[1354,0,640,717],[0,0,710,889]]}
+		{name:"UT_atlas_", frames: [[1354,719,640,715],[642,1438,640,697],[0,1601,640,696],[0,2299,640,693],[944,2835,270,216],[0,2994,229,191],[1354,1436,640,712],[944,3053,270,216],[712,0,640,720],[712,722,640,714],[0,891,640,708],[1284,2150,639,680],[642,2137,640,696],[1284,2832,628,640],[1354,0,640,717],[642,2835,300,239],[0,0,710,889]]}
 ];
 
 
@@ -46,77 +46,77 @@ lib.ssMetadata = [
 
 
 
-(lib._14 = function() {
+(lib._17 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(5);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._17 = function() {
+(lib._2 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(6);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._2 = function() {
+(lib._21 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(7);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._21 = function() {
+(lib._3 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(8);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._3 = function() {
+(lib._4 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(9);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._4 = function() {
+(lib._5 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(10);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._5 = function() {
+(lib._6 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(11);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._6 = function() {
+(lib._7 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(12);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._7 = function() {
+(lib._8 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(13);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._8 = function() {
+(lib._9 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(14);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib._9 = function() {
+(lib._141 = function() {
 	this.spriteSheet = ss["UT_atlas_"];
 	this.gotoAndStop(15);
 }).prototype = p = new cjs.Sprite();
@@ -445,10 +445,10 @@ p.nominalBounds = new cjs.Rectangle(1.6,-1,407.5,25.9);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
-	// 图层_2
-	this.instance_1 = new lib._14();
+	// 图层_3
+	this.instance_1 = new lib._141();
 	this.instance_1.parent = this;
-	this.instance_1.setTransform(41,38,1.778,1.778);
+	this.instance_1.setTransform(34,33,1.1,1.1);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
 
