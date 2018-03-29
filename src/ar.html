@@ -13,7 +13,7 @@
 	<meta itemprop="image" content="" /><!--分享卡图片URL预埋meta-->
 	<meta http-equiv="x-dns-prefetch-control" content="on" /><!--是否开启域名DNS预加载-->
 	<link rel="dns-prefetch" href="" /><!--需要预加载的域名-->
-	<title>优衣库</title>
+	<title>优衣库数字体验馆</title>
 	<script type="text/javascript">
 	(function (win,doc){
 		if (!win.addEventListener) return;
@@ -117,9 +117,11 @@
 				}
 			}
   </style>
+  <link href="css/app.css" rel="stylesheet"></head>
 </head>
 <script src="http://sqimg.qq.com/qq_product_operations/jslib/zepto.min.js?_bid=2439"></script><!--zepto-->
 <script src="http://open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
+<script src="http://appmedia.qq.com/media/631007208/appin/h5e.2.0.5.js" id='h5e-node' arg='{"tamsid":"641012709", "appid":"",  "env": "pro", "debug": false, "track": true }'></script>
 <body>
 
 	<div class="content-wrap">
@@ -324,7 +326,33 @@ if (ENV.is_ios) {
 		_cartoon.play(name);
 	}
 </script>
-
+<script>
+	//统一分享
+	var siteUrl = window.location.href;
+	var share_obj_all = {
+			title: "优衣库数字体验馆",
+			desc: "点击进入优衣库衣启活力新生数字体验馆！",
+			timeLineTitle: "点击进入优衣库衣启活力新生数字体验馆！",
+		    img: "http://appmedia.qq.com/media/uniqlo/200x200.png",
+		    url: siteUrl,
+		    onSuccess: function(res){
+		    },
+		    onCancel: function (res) {
+		    }
+	};
+	h5e.share.init(share_obj_all);
+	
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500600504");
+  		mta.setAttribute("cid", "500600505");
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
 </body>
 </body>
 </html>
