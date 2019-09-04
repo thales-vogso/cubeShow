@@ -8,7 +8,7 @@
 *	@modify	null
 ******************************************************************************/
 
-import "three/examples/js/controls/DeviceOrientationControls";
+import { DeviceOrientationControls } from "three/examples/jsm/controls/DeviceOrientationControls";
 
 import Cube from "./cube";
 import Cartoon from "./cartoon";
@@ -230,7 +230,7 @@ var main = function(container){
 	 *	控制
 	 */
 	_this.control = function(){
-		_controls = new THREE.DeviceOrientationControls(__camera);
+		_controls = new DeviceOrientationControls(__camera);
 		_controls.noZoom = true;
 		_controls.noPan = true;
 		__renderer.domElement.addEventListener( 'click', onClick, false );
